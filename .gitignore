@@ -1,0 +1,32 @@
+# Dependencies
+/frontend/node_modules
+/backend/node_modules
+npm-debug.log
+yarn-error.log
+
+# Production builds
+/frontend/dist
+/backend/dist
+
+# Angular
+/frontend/.angular/cache
+/frontend/tmp
+/frontend/out-tsc
+
+# Environment variables
+.env
+.env.local
+
+# Docker
+docker-compose.override.yml
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

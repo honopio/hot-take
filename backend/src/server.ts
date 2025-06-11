@@ -4,9 +4,11 @@ import { connectToDatabase, getDb } from './database';
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
+app.get('/api/polls', async (req, res) => {
   const db = getDb();
-  res.send('Response');
+  const collection = await db.collection('polls');
+  const polls = await collection.find({}).toArray();
+  res.json(polls).status(200);
 });
 
 connectToDatabase().then(() => {

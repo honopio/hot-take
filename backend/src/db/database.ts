@@ -15,11 +15,6 @@ export async function connectToDatabase(uri: string) {
   collections.polls = db.collection('polls');
 }
 
-export function getDb(): mongodb.Db {
-  if (!db) throw new Error('Database not connected!');
-  return db;
-}
-
 async function applySchemaValidation(db: mongodb.Db) {
   const jsonSchema = {
     $jsonSchema: {

@@ -1,5 +1,9 @@
 import * as mongodb from 'mongodb';
 
+export const collections: {
+  polls?: mongodb.Collection
+} = {};
+
 let db: mongodb.Db;
 
 export async function connectToDatabase(uri: string) {
@@ -7,7 +11,8 @@ export async function connectToDatabase(uri: string) {
   await client.connect();
 
   db = client.db();
-  console.log('Connected to MongoDB');
+  await applySchemaValidation(db);
+  collections.polls = db.collection('polls');
 }
 
 export function getDb(): mongodb.Db {

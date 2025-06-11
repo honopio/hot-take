@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "nodemon --exec ts-node src/server.ts",
     "build": "tsc",
+    "seed": "ts-node src/db/seed.ts",
     "start": "node dist/server.js"
   },
   "keywords": [],

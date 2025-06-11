@@ -1,12 +1,11 @@
 import * as mongodb from 'mongodb';
 
-const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/polls'
-const client = new mongodb.MongoClient(uri);
-
 let db: mongodb.Db;
 
-export async function connectToDatabase() {
+export async function connectToDatabase(uri: string) {
+  const client = new mongodb.MongoClient(uri);
   await client.connect();
+
   db = client.db();
   console.log('Connected to MongoDB');
 }

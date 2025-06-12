@@ -12,3 +12,7 @@
 .btn {
   @apply px-4 py-2 rounded-lg shadow-lg font-semibold;
 }
+
+h1 {
+  @apply text-2xl sm:text-4xl lg:text-6xl font-bold text-text mb-6;
+}

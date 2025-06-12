@@ -19,6 +19,7 @@
 
 html {
   @apply text-text bg-background;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .btn {

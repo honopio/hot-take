@@ -14,5 +14,9 @@
 }
 
 h1 {
-  @apply text-2xl sm:text-4xl lg:text-6xl font-bold text-text mb-6;
+  @apply text-2xl sm:text-4xl lg:text-6xl font-bold text-text my-6;
+}
+
+h2 {
+  @apply text-xl sm:text-3xl lg:text-4xl font-bold text-center text-text my-6;
 }

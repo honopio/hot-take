@@ -1,32 +1,25 @@
 <!-- Hero Section -->
-<div class="px-6 py-8 sm:py-16 text-center">
-  <h1>Create & Share Polls Instantly</h1>
-  <p
-    class="text-lg sm:text-xl text-secondary-text mb-6 sm:mb-12 max-w-2xl mx-auto"
-  >
+<div class="p-6 sm:py-16 text-center rounded-xl bg-secondary border m-15">
+  <h1 class="text-black">Create & Share Polls Instantly</h1>
+  <p class="text-lg sm:text-xl text-black mb-6 sm:mb-12 max-w-2xl mx-auto">
     Get real-time feedback with interactive polls. Create, share, and analyze
     results in seconds.
   </p>
 
   <!-- Action Buttons -->
   <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-    <button
-      class="btn bg-primary hover:bg-primary/70 text-black"
-      routerLink="/create"
-    >
+    <button class="btn bg-black text-white" routerLink="/create">
       Create a Poll
     </button>
-    <span class="text-secondary-text">or</span>
-    <div class="flex gap-2">
+    <span class="text-black">or</span>
+    <div class="flex gap-4">
       <input
         routerLink="/poll/join"
         type="text"
         placeholder="Enter poll ID or link"
-        class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+        class="px-4 py-2 border rounded-lg focus:outline-none text-black"
       />
-      <button class="btn bg-accent hover:bg-accent/70 text-black">
-        Join Poll
-      </button>
+      <button class="btn bg-transparent text-black">Join Poll</button>
     </div>
   </div>
 </div>

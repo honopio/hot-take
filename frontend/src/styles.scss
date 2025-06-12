@@ -3,24 +3,37 @@
 @theme {
   --color-text: #070107; // black
   --color-secondary-text: #a4a4a4; // gray
-  --color-background: #bfc9bf; // light sage
-  --color-cards-background: #ffffff; // white
-  --color-primary: #b3a1ff; // purple
-  --color-accent: #a4f5a6; // light green
+  --color-background: #ffffff; // light sage
+  --color-primary: #ffec3a; // yellow
+  --color-secondary: #c4e99d; // light green
+  --color-accent: #f1704a; // orange
+}
+
+@layer base {
+  [data-theme="dark"],
+  .dark {
+    --color-text: #f7f6f9;
+    --color-background: #161616;
+  }
+}
+
+html {
+  @apply text-text bg-background;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .btn {
-  @apply px-4 py-2 rounded-lg shadow-lg font-semibold;
+  @apply px-4 py-2 rounded-lg font-semibold border border-black transition-colors transition-transform hover:scale-105;
 }
 
 h1 {
-  @apply text-2xl sm:text-4xl lg:text-6xl font-bold text-text my-3 sm:my-6;
+  @apply text-2xl sm:text-4xl lg:text-6xl font-bold my-3 sm:my-6;
 }
 
 h2 {
-  @apply text-xl sm:text-3xl lg:text-4xl font-bold text-center text-text my-6;
+  @apply text-xl sm:text-3xl lg:text-4xl font-bold text-center my-6;
 }
 
 h3 {
-  @apply text-lg sm:text-xl lg:text-2xl font-semibold text-text my-4;
+  @apply text-lg sm:text-xl lg:text-2xl font-semibold my-4;
 }

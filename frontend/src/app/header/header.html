@@ -1,8 +1,14 @@
-<header class="app-header px-6 py-4 bg-background">
-  <div class="logo">
+<header class="app-header px-6 py-4">
+  <div class="logo flex items-center justify-between w-full">
     <a routerLink="/" class="flex items-center space-x-3">
       <mat-icon class="scale-150">how_to_vote</mat-icon>
       <span class="text-xl font-semibold">hot take</span>
     </a>
+    <button
+      (click)="toggleTheme()"
+      class="ml-4 w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-200 transition"
+    >
+      <mat-icon>{{ isDark ? 'dark_mode' : 'light_mode' }}</mat-icon>
+    </button>
   </div>
 </header>

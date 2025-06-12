@@ -1,11 +1,17 @@
 import { Component } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import { RouterLink } from '@angular/router';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-header',
-  imports: [MatIconModule, RouterLink],
+  imports: [MatIcon],
   templateUrl: './header.html',
-  styleUrl: './header.scss',
+  styleUrls: ['./header.scss'],
 })
-export class Header {}
+export class Header {
+  isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  toggleTheme() {
+    this.isDark = !this.isDark;
+    document.documentElement.classList.toggle('dark', this.isDark); // adds dark class to the html element if isDark
+  }
+}

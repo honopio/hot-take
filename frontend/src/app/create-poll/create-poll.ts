@@ -1,0 +1,66 @@
+import { Component, ViewChild } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
+import { FormsModule, NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-create-poll',
+  imports: [MatIcon, RouterLink, FormsModule],
+  templateUrl: './create-poll.html',
+  styleUrl: './create-poll.scss',
+})
+export class CreatePoll {
+  @ViewChild('pollForm') pollForm!: NgForm;
+
+  constructor(private http: HttpClient) {}
+
+  options: string[] = ['', ''];
+  pollTitle: string = '';
+
+  addOption() {
+    if (this.options.length < 10) {
+      this.options.push('');
+    }
+  }
+
+  removeOption(index: number) {
+    if (this.options.length > 2) {
+      this.options.splice(index, 1);
+    }
+  }
+
+  resetForm() {
+    this.pollTitle = '';
+    this.options = ['', ''];
+
+    // Reset the form's validation state
+    if (this.pollForm) {
+      this.pollForm.resetForm({
+        pollTitle: '',
+        option0: '',
+        option1: '',
+      });
+    }
+  }
+
+  createPoll() {
+    if (this.pollTitle === '' || this.options.some((option) => option === '')) {
+      return;
+    }
+
+    this.http
+      .post('/api/polls', { title: this.pollTitle, options: this.options })
+      .subscribe({
+        next: (response) => {
+          console.log('Poll created successfully:', response);
+          this.resetForm();
+        },
+        error: (error) => {
+          console.error('Error creating poll:', error);
+        },
+      });
+
+    this.resetForm();
+  }
+}

@@ -1,0 +1,159 @@
+<form #pollForm="ngForm" (ngSubmit)="createPoll()" novalidate>
+  <!-- header -->
+  <div class="max-w-4xl mx-auto mb-8">
+    <div class="flex items-center gap-4 mb-4">
+      <button class="btn bg-transparent flex items-center gap-2" routerLink="/">
+        <mat-icon fontIcon="arrow_back"></mat-icon>
+        Back
+      </button>
+    </div>
+    <h1 class="text-center">Create Your Poll</h1>
+    <p class="text-center text-secondary-text text-lg max-w-2xl mx-auto">
+      Design your poll question and add options to choose from
+    </p>
+  </div>
+
+  <!-- poll creation form -->
+  <div class="max-w-6xl mx-auto bg-secondary border rounded-xl p-3 sm:p-8">
+    <!-- poll title action -->
+    <div class="mb-8">
+      <label class="block text-lg mb-5 text-black" for="poll-title">
+        Poll Question
+        <span class="text-accent ml-1">*</span>
+      </label>
+      <div class="relative">
+        <input
+          id="poll-title"
+          name="pollTitle"
+          type="text"
+          placeholder="e.g., Where should we go in July?"
+          class="w-full px-4 py-3 border border-black rounded-lg focus:outline-none focus:ring-2 text-black text-lg"
+          [(ngModel)]="pollTitle"
+          required
+          #pollTitleInput="ngModel"
+          maxlength="200"
+        />
+        <div class="absolute right-3 top-3 text-sm text-secondary-text">
+          {{ pollTitle.length }}/200
+        </div>
+      </div>
+      @if (pollTitleInput.invalid && (pollTitleInput.touched ||
+      pollForm.submitted)) {
+      <div class="text-accent mt-2 text-sm flex items-center gap-1">
+        <mat-icon fontIcon="error" class="text-sm"></mat-icon>
+        Please enter your question
+      </div>
+      }
+    </div>
+
+    <!-- options section -->
+    <div class="mb-8">
+      <label class="text-lg mb-3 block text-black font-medium">
+        Poll Options
+        <span class="text-accent ml-1">*</span>
+      </label>
+
+      <div class="space-y-4">
+        @for (option of options; let i = $index; track i) {
+        <div class="group">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-8 h-8 rounded-full border border-black flex items-center justify-center flex-shrink-0 group-focus-within:border-2 transition-all"
+            >
+              <span class="text-black">{{ i + 1 }}</span>
+            </div>
+            <div class="flex-1 relative">
+              <input
+                type="text"
+                name="option{{i}}"
+                [placeholder]="'Option ' + (i + 1)"
+                maxlength="100"
+                class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 text-black transition-all focus:placeholder-transparent"
+                [(ngModel)]="options[i]"
+                required
+                #optionInput="ngModel"
+              />
+              <div class="absolute right-3 top-3 text-xs text-secondary-text">
+                {{ options[i].length }}/100
+              </div>
+            </div>
+            @if (options.length > 2) {
+            <button
+              type="button"
+              class="w-8 h-8 flex items-center justify-center text-accent hover:bg-accent hover:text-white rounded-full transition-colors"
+              title="Remove option"
+              (click)="removeOption(i)"
+            >
+              <mat-icon fontIcon="close" class="text-lg"></mat-icon>
+            </button>
+            }
+          </div>
+          @if (optionInput.invalid && (optionInput.touched ||
+          pollForm.submitted)) {
+          <div class="text-accent text-sm mt-1 ml-11 flex items-center gap-1">
+            <mat-icon fontIcon="error" class="text-sm"></mat-icon>
+            This option cannot be empty
+          </div>
+          }
+        </div>
+        }
+      </div>
+
+      <!-- add option button -->
+      <div class="mt-6">
+        @if (options.length < 10) {
+        <button
+          type="button"
+          class="btn w-full flex items-center justify-center gap-2 border-black text-black"
+          (click)="addOption()"
+        >
+          <mat-icon fontIcon="add_circle"></mat-icon>
+          <span>Add another option</span>
+          <span class="text-sm text-secondary-text"
+            >({{ options.length }}/10)</span
+          >
+        </button>
+        } @else {
+        <div class="text-center text-secondary-text text-sm py-2">
+          Maximum of 10 options reached
+        </div>
+        }
+      </div>
+    </div>
+
+    <!-- form actions -->
+    <div class="border-t text-black pt-6">
+      <div class="flex flex-row gap-4 justify-center items-center">
+        <button type="button" class="btn" (click)="resetForm()">
+          Reset Form
+        </button>
+        <button
+          type="submit"
+          class="btn bg-black border border-black text-white disabled:opacity-50 disabled:cursor-not-allowed flex"
+        >
+          <mat-icon fontIcon="poll" class="mr-2"></mat-icon>
+          Create Poll
+        </button>
+      </div>
+
+      <!-- form status -->
+      <div class="mt-4 text-center">
+        @if (!pollForm.valid) {
+        <div
+          class="text-sm text-secondary-text flex items-center justify-center gap-1"
+        >
+          <mat-icon fontIcon="info" class="text-sm"></mat-icon>
+          Please fill in all required fields to create your poll
+        </div>
+        } @else {
+        <div
+          class="text-sm text-green-600 flex items-center justify-center gap-1"
+        >
+          <mat-icon fontIcon="check_circle" class="text-sm"></mat-icon>
+          Your poll is ready to create!
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</form>

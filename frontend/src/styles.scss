@@ -23,7 +23,10 @@ html {
 }
 
 .btn {
-  @apply px-4 py-2 rounded-lg font-semibold border border-black transition-colors transition-transform hover:scale-105;
+  @apply px-4 py-2 rounded-lg font-semibold border transition-colors transition-transform cursor-pointer;
+  &:disabled {
+    @apply opacity-50 scale-100 cursor-auto;
+  }
 }
 
 h1 {

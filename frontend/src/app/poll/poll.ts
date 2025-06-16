@@ -3,10 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-poll',
-  imports: [RouterLink, MatIcon, FormsModule],
+  imports: [RouterLink, MatIcon, FormsModule, NgClass],
   templateUrl: './poll.html',
 })
 export class Poll {

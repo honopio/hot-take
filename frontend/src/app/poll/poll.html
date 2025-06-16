@@ -1,30 +1,37 @@
-<div
-  class="max-w-4xl mx-auto my-10 bg-secondary border-2 border-black rounded-xl p-6 sm:p-10"
->
+<div class="max-w-6xl mx-auto my-10 sm:border rounded-xl p-3 sm:p-8">
   <!-- header -->
-  <div class="mb-8">
-    <button
-      class="btn bg-transparent text-black flex items-center gap-2"
-      routerLink="/"
-    >
-      <mat-icon fontIcon="arrow_back"></mat-icon>
-      Back
-    </button>
-    <h2 class="text-center text-black mb-2">{{ pollData()?.title }}</h2>
+  <button
+    class="btn bg-transparent flex items-center gap-2 hover:bg-primary/80 transition-colors mb-6"
+    routerLink="/"
+  >
+    <mat-icon fontIcon="arrow_back"></mat-icon>
+    Back
+  </button>
+  <div class="max-w-4xl mx-auto mb-2 sm:mb-8 flex flex-col items-center">
+    <div class="relative inline-block w-max">
+      <span
+        class="absolute left-0 right-0 bottom-5 h-3 sm:h-5 bg-primary/60"
+      ></span>
+      <h2 class="text-center relative z-10 px-2">{{ pollData()?.title }}</h2>
+    </div>
   </div>
 
   <!-- poll form -->
   <form #voteForm="ngForm" (ngSubmit)="submitVote()">
-    <div class="space-y-3 mb-6">
+    <div class="space-y-4 mb-6">
       @for (option of pollData()?.options; track option.optionId) {
       <label
-        class="flex items-center p-4 bg-background border-2 border-black rounded-lg cursor-pointer hover:border-accent"
+        class="flex items-center p-4 bg-background border rounded-lg cursor-pointer transition-colors"
+        [ngClass]="{
+          'border-primary border-2': selectedOption === option.optionId,
+          'border-gray-200': selectedOption !== option.optionId
+        }"
       >
         <input
           type="radio"
           name="pollOption"
           [value]="option.optionId"
-          class="w-5 h-5 mr-4 accent-accent"
+          class="w-5 h-5 mr-4 accent-primary"
           [(ngModel)]="selectedOption"
           required
         />
@@ -33,15 +40,15 @@
       }
     </div>
 
-    <button
-      type="submit"
-      class="w-full py-3 bg-accent text-black font-bold border-2 border-black rounded-lg hover:border-accent"
-    >
-      Submit Vote
-    </button>
+    <div class="flex flex-row gap-4 justify-center items-center">
+      <button type="submit" class="btn font-bold flex hover:bg-primary/70">
+        <mat-icon fontIcon="poll" class="mr-2"></mat-icon>
+        Submit Vote
+      </button>
+    </div>
     @if (voteForm.submitted && !voteForm.valid) {
     <div
-      class="mt-4 text-sm text-accent flex items-center justify-center gap-1"
+      class="mt-4 text-sm text-primary flex items-center justify-center gap-1"
     >
       <mat-icon fontIcon="info" class="text-sm"></mat-icon>
       Please select an option

@@ -1,5 +1,6 @@
 import express from "express";
 import { connectToDatabase, collections } from "./db/database";
+import { ObjectId } from "mongodb";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -18,6 +19,22 @@ app.get("/api/polls", async (req, res) => {
   }
 });
 
+app.get("/api/polls/:id", async (req, res) => {
+  try {
+    const pollId = new ObjectId(req.params.id);
+    const poll = await collections?.polls?.findOne({ _id: pollId });
+    if (poll) {
+      res.status(200).json(poll);
+    } else {
+      res.status(404).json({ error: "Poll not found" });
+    }
+  } catch (error) {
+    res.status(500).json({
+      error: error instanceof Error ? error.message : "Unknown error",
+    });
+  }
+});
+
 app.post("/api/polls", async (req, res) => {
   try {
     const { title, options } = req.body as { title: string; options: string[] };
@@ -26,6 +43,7 @@ app.post("/api/polls", async (req, res) => {
       return;
     }
     const formattedOptions = options.map((option: string) => ({
+      optionId: new ObjectId(),
       text: option,
       votes: 0,
     }));
@@ -36,7 +54,7 @@ app.post("/api/polls", async (req, res) => {
     };
     const result = await collections?.polls?.insertOne(newPoll);
     if (result?.acknowledged) {
-      res.status(201).send({ id: result.insertedId, ...newPoll });
+      res.status(201).send({ _id: result.insertedId });
     } else {
       res.status(500).send("Failed to create poll");
     }
@@ -44,6 +62,23 @@ app.post("/api/polls", async (req, res) => {
     res
       .status(500)
       .send(error instanceof Error ? error.message : "Unknown error");
+  }
+});
+
+app.post("/api/polls/:id/vote", async (req, res) => {
+  const pollId = new ObjectId(req.params.id);
+  const optionId = req.body.optionId;
+
+  const result = await collections?.polls?.updateOne(
+    { _id: pollId, "options.optionId": optionId },
+    // increment the votes field of the matched option by 1
+    { $inc: { "options.$.votes": 1 } }
+  );
+
+  if (result?.modifiedCount === 1) {
+    res.status(200).json({ message: "Vote counted" });
+  } else {
+    res.status(404).json({ error: "Poll or option not found" });
   }
 });
 

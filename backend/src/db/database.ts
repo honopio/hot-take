@@ -1,7 +1,7 @@
-import * as mongodb from 'mongodb';
+import * as mongodb from "mongodb";
 
 export const collections: {
-  polls?: mongodb.Collection
+  polls?: mongodb.Collection;
 } = {};
 
 let db: mongodb.Db;
@@ -12,7 +12,7 @@ export async function connectToDatabase(uri: string) {
 
   db = client.db();
   await applySchemaValidation(db);
-  collections.polls = db.collection('polls');
+  collections.polls = db.collection("polls");
 }
 
 async function applySchemaValidation(db: mongodb.Db) {
@@ -30,25 +30,27 @@ async function applySchemaValidation(db: mongodb.Db) {
           bsonType: "array",
           items: {
             bsonType: "object",
-            required: ["text", "votes"],
+            required: ["optionId", "text", "votes"],
             properties: {
+              optionId: { bsonType: "objectId" },
               text: { bsonType: "string" },
-              votes: { bsonType: "int" }
-            }
-          }
-        }
-      }
-    }
+              votes: { bsonType: "int" },
+            },
+          },
+        },
+      },
+    },
   };
 
   //try applying the modification to the collection, and creates it if it doesn't exist
-  await db.command({
-    collMod: "polls",
-    validator: jsonSchema
-  })
-  .catch(async (error: mongodb.MongoServerError) => {
-    if (error.codeName === 'NamespaceNotFound') {
-      await db.createCollection("polls", {validator: jsonSchema });
-    }
-  })
+  await db
+    .command({
+      collMod: "polls",
+      validator: jsonSchema,
+    })
+    .catch(async (error: mongodb.MongoServerError) => {
+      if (error.codeName === "NamespaceNotFound") {
+        await db.createCollection("polls", { validator: jsonSchema });
+      }
+    });
 }

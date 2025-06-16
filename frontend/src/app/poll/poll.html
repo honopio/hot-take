@@ -1,0 +1,51 @@
+<div
+  class="max-w-4xl mx-auto my-10 bg-secondary border-2 border-black rounded-xl p-6 sm:p-10"
+>
+  <!-- header -->
+  <div class="mb-8">
+    <button
+      class="btn bg-transparent text-black flex items-center gap-2"
+      routerLink="/"
+    >
+      <mat-icon fontIcon="arrow_back"></mat-icon>
+      Back
+    </button>
+    <h2 class="text-center text-black mb-2">{{ pollData()?.title }}</h2>
+  </div>
+
+  <!-- poll form -->
+  <form #voteForm="ngForm" (ngSubmit)="submitVote()">
+    <div class="space-y-3 mb-6">
+      @for (option of pollData()?.options; track option.optionId) {
+      <label
+        class="flex items-center p-4 bg-background border-2 border-black rounded-lg cursor-pointer hover:border-accent"
+      >
+        <input
+          type="radio"
+          name="pollOption"
+          [value]="option.optionId"
+          class="w-5 h-5 mr-4 accent-accent"
+          [(ngModel)]="selectedOption"
+          required
+        />
+        <span class="text-lg">{{ option.text }}</span>
+      </label>
+      }
+    </div>
+
+    <button
+      type="submit"
+      class="w-full py-3 bg-accent text-black font-bold border-2 border-black rounded-lg hover:border-accent"
+    >
+      Submit Vote
+    </button>
+    @if (voteForm.submitted && !voteForm.valid) {
+    <div
+      class="mt-4 text-sm text-accent flex items-center justify-center gap-1"
+    >
+      <mat-icon fontIcon="info" class="text-sm"></mat-icon>
+      Please select an option
+    </div>
+    }
+  </form>
+</div>

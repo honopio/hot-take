@@ -1,6 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
@@ -11,12 +11,12 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './create-poll.scss',
 })
 export class CreatePoll {
-  @ViewChild('pollForm') pollForm!: NgForm;
-
   constructor(private http: HttpClient) {}
 
+  @ViewChild('pollForm') pollForm!: NgForm;
   options: string[] = ['', ''];
   pollTitle: string = '';
+  private router = inject(Router);
 
   addOption() {
     if (this.options.length < 10) {
@@ -53,8 +53,8 @@ export class CreatePoll {
       .post('/api/polls', { title: this.pollTitle, options: this.options })
       .subscribe({
         next: (response) => {
-          console.log('Poll created successfully:', response);
-          this.resetForm();
+          const newPollId = (response as any)._id;
+          this.router.navigate([`/poll/${newPollId}`]);
         },
         error: (error) => {
           console.error('Error creating poll:', error);

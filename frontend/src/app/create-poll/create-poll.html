@@ -40,7 +40,7 @@
       @if (pollTitleInput.invalid && (pollTitleInput.touched ||
       pollForm.submitted)) {
       <div class="text-accent mt-2 text-sm flex items-center gap-1">
-        <mat-icon fontIcon="error" class="text-sm"></mat-icon>
+        <mat-icon fontIcon="info" class="text-sm"></mat-icon>
         Please enter your question
       </div>
       }
@@ -91,7 +91,7 @@
           @if (optionInput.invalid && (optionInput.touched ||
           pollForm.submitted)) {
           <div class="text-accent text-sm mt-1 ml-11 flex items-center gap-1">
-            <mat-icon fontIcon="error" class="text-sm"></mat-icon>
+            <mat-icon fontIcon="info" class="text-sm"></mat-icon>
             This option cannot be empty
           </div>
           }
@@ -139,18 +139,16 @@
       <!-- form status -->
       <div class="mt-4 text-center">
         @if (!pollForm.valid) {
-        <div
-          class="text-sm text-secondary-text flex items-center justify-center gap-1"
-        >
+        <div class="text-sm text-accent flex items-center justify-center gap-1">
           <mat-icon fontIcon="info" class="text-sm"></mat-icon>
-          Please fill in all required fields to create your poll
+          Please fill in all fields to create your poll
         </div>
         } @else {
         <div
           class="text-sm text-green-600 flex items-center justify-center gap-1"
         >
           <mat-icon fontIcon="check_circle" class="text-sm"></mat-icon>
-          Your poll is ready to create!
+          Your poll is ready!
         </div>
         }
       </div>

@@ -66,8 +66,8 @@ app.post("/api/polls", async (req, res) => {
 });
 
 app.post("/api/polls/:id/vote", async (req, res) => {
-  const pollId = new ObjectId(req.params.id);
-  const optionId = req.body.optionId;
+  const pollId = ObjectId.createFromHexString(req.params.id);
+  const optionId = ObjectId.createFromHexString(req.body.optionId);
 
   const result = await collections?.polls?.updateOne(
     { _id: pollId, "options.optionId": optionId },

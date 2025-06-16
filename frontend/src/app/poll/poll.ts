@@ -21,7 +21,6 @@ export class Poll {
     const pollId = this.route.snapshot.params['id'];
     this.http.get(`/api/polls/${pollId}`).subscribe({
       next: (response) => {
-        console.log('Poll data:', response);
         this.pollData.set(response);
       },
       error: (error) => console.error('Error fetching poll:', error),
@@ -29,7 +28,6 @@ export class Poll {
   }
 
   submitVote() {
-    console.log('Submitting vote', this.selectedOption);
     if (!this.selectedOption) {
       return;
     }

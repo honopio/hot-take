@@ -7,7 +7,16 @@
     <mat-icon fontIcon="arrow_back"></mat-icon>
     Back
   </button>
-  <div class="max-w-4xl mx-auto mb-2 sm:mb-8 flex flex-col items-center">
+  @if (this.successMessage) {
+  <div
+    class="maw-w-2xl flex items-center justify-center p-4 mb-4 border border-secondary rounded-lg bg-secondary/30 text-xl"
+    role="alert"
+  >
+    <mat-icon fontIcon="check_circle" class="mr-2" />
+    <div>{{this.successMessage}}</div>
+  </div>
+  }
+  <div class="mx-auto mb-2 sm:mb-8 flex flex-col items-center">
     <div class="relative inline-block w-max">
       <span
         class="absolute left-0 right-0 bottom-5 h-3 sm:h-5 bg-primary/60"

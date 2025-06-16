@@ -54,7 +54,9 @@ export class CreatePoll {
       .subscribe({
         next: (response) => {
           const newPollId = (response as any)._id;
-          this.router.navigate([`/poll/${newPollId}`]);
+          this.router.navigate(['/poll', newPollId], {
+            state: { success: true },
+          });
         },
         error: (error) => {
           console.error('Error creating poll:', error);

@@ -16,6 +16,7 @@ export class Poll {
 
   pollData = signal<any>(null);
   selectedOption = '';
+  successMessage = '';
 
   constructor() {
     const pollId = this.route.snapshot.params['id'];
@@ -25,6 +26,12 @@ export class Poll {
       },
       error: (error) => console.error('Error fetching poll:', error),
     });
+
+    const nav = window.history.state;
+    if (nav && nav.success) {
+      this.successMessage = 'Poll created!';
+      history.replaceState({}, document.title);
+    }
   }
 
   submitVote() {

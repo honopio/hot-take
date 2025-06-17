@@ -1,5 +1,7 @@
 <!-- Hero Section -->
-<div class="px-5 py-16 m-5 md:m-15 text-center rounded-xl bg-secondary border">
+<div
+  class="px-5 py-16 m-5 md:m-15 text-center rounded-xl bg-secondary border-black"
+>
   <h1 class="text-black">Create & Share Polls Instantly</h1>
   <p class="text-lg sm:text-xl text-black mb-6 sm:mb-12 max-w-2xl mx-auto">
     Get real-time feedback with interactive polls. Create, share, and analyze
@@ -14,12 +16,17 @@
     <span class="text-black">or</span>
     <div class="flex gap-4">
       <input
-        routerLink="/poll/join"
+        #pollInput
         type="text"
         placeholder="Enter poll ID or link"
         class="px-4 py-2 border rounded-lg focus:outline-none text-black"
       />
-      <button class="btn bg-transparent text-black">Join Poll</button>
+      <button
+        class="btn bg-transparent text-black"
+        (click)="joinPoll(pollInput.value)"
+      >
+        Join Poll
+      </button>
     </div>
   </div>
 </div>
@@ -32,7 +39,7 @@
     <!-- Left card -->
     <div class="rounded-xl p-8 border border-text">
       <div
-        class="w-16 h-16 bg-accent rounded-full border flex items-center justify-center mb-6 mx-auto"
+        class="w-16 h-16 bg-accent rounded-full border border-black flex items-center justify-center mb-6 mx-auto"
       >
         <mat-icon fontIcon="add" style="color: black"></mat-icon>
       </div>
@@ -45,7 +52,7 @@
     <!-- Share Poll Card -->
     <div class="rounded-xl p-8 border border-text">
       <div
-        class="w-16 h-16 bg-secondary rounded-full border flex items-center justify-center mb-6 mx-auto"
+        class="w-16 h-16 bg-secondary rounded-full border border-black flex items-center justify-center mb-6 mx-auto"
       >
         <mat-icon fontIcon="share" style="color: black"></mat-icon>
       </div>
@@ -59,7 +66,7 @@
     <!-- View Results Card -->
     <div class="rounded-xl p-8 border border-text">
       <div
-        class="w-16 h-16 bg-primary rounded-full border flex items-center justify-center mb-6 mx-auto"
+        class="w-16 h-16 bg-primary rounded-full border border-black flex items-center justify-center mb-6 mx-auto"
       >
         <mat-icon fontIcon="bar_chart" style="color: black"></mat-icon>
       </div>

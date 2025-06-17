@@ -18,6 +18,6 @@ export class Home {
     if (match) {
       pollId = match[1]; // only extract the id part (between () in the regex)
     }
-    this.router.navigate(['/poll', pollId]);
+    this.router.navigate(['/polls', pollId]);
   }
 }

@@ -2,7 +2,7 @@
   <form #pollForm="ngForm" (ngSubmit)="createPoll()" novalidate>
     <!-- header -->
     <button
-      class="btn bg-transparent flex items-center gap-2 hover:bg-secondary hover:text-black mb-6"
+      class="btn bg-secondary text-black flex items-center gap-2 mb-6"
       routerLink="/"
     >
       <mat-icon fontIcon="arrow_back"></mat-icon>
@@ -108,7 +108,7 @@
         <div class="flex justify-center">
           <button
             type="button"
-            class="btn flex items-center justify-center gap-2 hover:bg-secondary hover:text-black"
+            class="btn flex items-center justify-center gap-2 bg-secondary hover:bg-opacity-80 text-black"
             (click)="addOption()"
           >
             <mat-icon fontIcon="add_circle"></mat-icon>

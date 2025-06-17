@@ -20,19 +20,17 @@ app.get("/api/polls", async (req, res) => {
 });
 
 app.get("/api/polls/:id", async (req, res) => {
-  try {
-    const pollId = new ObjectId(req.params.id);
-    const poll = await collections?.polls?.findOne({ _id: pollId });
-    if (poll) {
-      res.status(200).json(poll);
-    } else {
-      res.status(404).json({ error: "Poll not found" });
-    }
-  } catch (error) {
-    res.status(500).json({
-      error: error instanceof Error ? error.message : "Unknown error",
-    });
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(404).send("Poll not found");
+    return;
   }
+  const pollId = new ObjectId(req.params.id);
+  const poll = await collections?.polls?.findOne({ _id: pollId });
+  if (!poll) {
+    res.status(404).send("Poll not found");
+    return;
+  }
+  res.status(200).json(poll);
 });
 
 app.post("/api/polls", async (req, res) => {

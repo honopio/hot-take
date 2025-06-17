@@ -22,32 +22,25 @@ app.get("/api/polls/:id", async (req, res) => {
 });
 
 app.post("/api/polls", async (req, res) => {
-  try {
-    const { title, options } = req.body as { title: string; options: string[] };
-    if (!title || !Array.isArray(options)) {
-      res.status(400).send("Invalid poll data");
-      return;
-    }
-    const formattedOptions = options.map((option: string) => ({
-      optionId: new ObjectId(),
-      text: option,
-      votes: 0,
-    }));
-    const newPoll = {
-      title,
-      options: formattedOptions,
-      createdAt: new Date(),
-    };
-    const result = await collections?.polls?.insertOne(newPoll);
-    if (result?.acknowledged) {
-      res.status(201).send({ _id: result.insertedId });
-    } else {
-      res.status(500).send("Failed to create poll");
-    }
-  } catch (error) {
-    res
-      .status(500)
-      .send(error instanceof Error ? error.message : "Unknown error");
+  const { title, options } = req.body as { title: string; options: string[] };
+  if (!title || !Array.isArray(options)) {
+    throw createHttpError(400, "Title and options are required");
+  }
+  const formattedOptions = options.map((option: string) => ({
+    optionId: new ObjectId(),
+    text: option,
+    votes: 0,
+  }));
+  const newPoll = {
+    title,
+    options: formattedOptions,
+    createdAt: new Date(),
+  };
+  const result = await collections?.polls?.insertOne(newPoll);
+  if (result?.acknowledged) {
+    res.status(201).send({ _id: result.insertedId });
+  } else {
+    throw createHttpError(500, "Failed to create poll");
   }
 });
 
@@ -64,7 +57,7 @@ app.post("/api/polls/:id/vote", async (req, res) => {
   if (result?.modifiedCount === 1) {
     res.status(200).json({ message: "Vote counted" });
   } else {
-    res.status(404).json({ error: "Poll or option not found" });
+    throw createHttpError(404, "Poll or option not found");
   }
 });
 

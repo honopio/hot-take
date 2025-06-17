@@ -1,6 +1,7 @@
 import express from "express";
 import { connectToDatabase, collections } from "./db/database";
 import { ObjectId } from "mongodb";
+import createHttpError from "http-errors";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -8,27 +9,14 @@ const mongodb_uri = process.env.MONGODB_URI || "";
 
 app.use(express.json());
 
-app.get("/api/polls", async (req, res) => {
-  try {
-    const polls = await collections?.polls?.find({}).toArray();
-    res.status(200).send(polls);
-  } catch (error) {
-    res
-      .status(500)
-      .send(error instanceof Error ? error.message : "Unknown error");
-  }
-});
-
 app.get("/api/polls/:id", async (req, res) => {
   if (!ObjectId.isValid(req.params.id)) {
-    res.status(404).send("Poll not found");
-    return;
+    throw createHttpError(400, "Invalid poll ID format");
   }
   const pollId = new ObjectId(req.params.id);
   const poll = await collections?.polls?.findOne({ _id: pollId });
   if (!poll) {
-    res.status(404).send("Poll not found");
-    return;
+    throw createHttpError(404, "Poll not found");
   }
   res.status(200).json(poll);
 });

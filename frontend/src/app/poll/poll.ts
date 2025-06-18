@@ -13,10 +13,10 @@ import { NgClass } from '@angular/common';
 export class Poll {
   private http = inject(HttpClient);
   private route = inject(ActivatedRoute);
-
   pollData = signal<any>(null);
   selectedOption = '';
   successMessage = '';
+  errorMessage = '';
 
   constructor() {
     const pollId = this.route.snapshot.params['id'];
@@ -24,7 +24,10 @@ export class Poll {
       next: (response) => {
         this.pollData.set(response);
       },
-      error: (error) => console.error('Error fetching poll:', error),
+      error: (error) => {
+        console.error('Error fetching poll:', error);
+        this.errorMessage = 'Sorry, we could not find that poll.';
+      },
     });
 
     const nav = window.history.state;

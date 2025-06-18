@@ -61,7 +61,6 @@ app.post("/api/polls/:id/vote", async (req, res) => {
   }
 });
 
-// Error handling middleware - must be defined AFTER all routes
 app.use(
   (
     err: any,
@@ -69,12 +68,7 @@ app.use(
     res: express.Response,
     next: express.NextFunction
   ) => {
-    // If headers have already been sent, delegate to Express default error handler
-    if (res.headersSent) {
-      return next(err);
-    }
-
-    // Log the error for debugging
+    // log the error
     console.error("Error occurred:", {
       message: err.message,
       status: err.status || err.statusCode || 500,
@@ -83,16 +77,11 @@ app.use(
       method: req.method,
     });
 
-    // Send error response
+    // send error response
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
 
-    res.status(status).json({
-      error: {
-        message,
-        status,
-      },
-    });
+    res.status(status).json({ message, status });
   }
 );
 

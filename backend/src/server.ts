@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.get("/api/polls/:id", async (req, res) => {
   if (!ObjectId.isValid(req.params.id)) {
-    throw createHttpError(400, "Invalid poll ID format");
+    throw createHttpError(404, "Poll not found");
   }
   const pollId = new ObjectId(req.params.id);
   const poll = await collections?.polls?.findOne({ _id: pollId });
@@ -60,6 +60,41 @@ app.post("/api/polls/:id/vote", async (req, res) => {
     throw createHttpError(404, "Poll or option not found");
   }
 });
+
+// Error handling middleware - must be defined AFTER all routes
+app.use(
+  (
+    err: any,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    // If headers have already been sent, delegate to Express default error handler
+    if (res.headersSent) {
+      return next(err);
+    }
+
+    // Log the error for debugging
+    console.error("Error occurred:", {
+      message: err.message,
+      status: err.status || err.statusCode || 500,
+      stack: process.env.NODE_ENV === "development" ? err.stack : undefined,
+      path: req.path,
+      method: req.method,
+    });
+
+    // Send error response
+    const status = err.status || err.statusCode || 500;
+    const message = err.message || "Internal Server Error";
+
+    res.status(status).json({
+      error: {
+        message,
+        status,
+      },
+    });
+  }
+);
 
 connectToDatabase(mongodb_uri)
   .then(() => {

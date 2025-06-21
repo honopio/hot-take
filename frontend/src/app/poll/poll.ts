@@ -18,9 +18,12 @@ export class Poll {
   successMessage = '';
   errorMessage = '';
   copied = false;
+  hasVoted = signal<boolean>(false);
 
   constructor() {
     const pollId = this.route.snapshot.params['id'];
+    this.checkIfVoted(pollId);
+
     this.http.get(`/api/polls/${pollId}`).subscribe({
       next: (response) => {
         this.pollData.set(response);
@@ -38,17 +41,39 @@ export class Poll {
     }
   }
 
+  checkIfVoted(pollId: string) {
+    const votedPolls = JSON.parse(localStorage.getItem('votedPolls') || '[]');
+    if (votedPolls.includes(pollId)) {
+      this.hasVoted.set(true);
+    }
+  }
+
   submitVote() {
-    if (!this.selectedOption) {
+    if (!this.selectedOption || this.hasVoted()) {
       return;
     }
+
+    const pollId = this.pollData()._id;
+
     this.http
-      .post(`/api/polls/${this.pollData()._id}/vote`, {
+      .post(`/api/polls/${pollId}/vote`, {
         optionId: this.selectedOption,
       })
       .subscribe({
         next: (response) => {
-          console.log('Vote submitted successfully:', response);
+          // Mark this poll as voted in localStorage
+          const votedPolls = JSON.parse(
+            localStorage.getItem('votedPolls') || '[]'
+          );
+          votedPolls.push(pollId);
+          localStorage.setItem('votedPolls', JSON.stringify(votedPolls));
+
+          this.hasVoted.set(true);
+          this.successMessage = 'Thank you for voting!';
+        },
+        error: (error) => {
+          console.error('Error submitting vote:', error);
+          this.errorMessage = 'Error submitting your vote. Please try again.';
         },
       });
   }

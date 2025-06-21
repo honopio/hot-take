@@ -17,6 +17,7 @@ export class Poll {
   selectedOption = '';
   successMessage = '';
   errorMessage = '';
+  copied = false;
 
   constructor() {
     const pollId = this.route.snapshot.params['id'];
@@ -50,5 +51,16 @@ export class Poll {
           console.log('Vote submitted successfully:', response);
         },
       });
+  }
+
+  get pollLink() {
+    const pollId = this.route.snapshot.params['id'];
+    return pollId ? `${window.location.origin}/poll/${pollId}` : '';
+  }
+
+  copyLink() {
+    navigator.clipboard.writeText(this.pollLink).then(() => {
+      this.copied = true;
+    });
   }
 }

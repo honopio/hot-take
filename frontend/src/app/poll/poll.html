@@ -16,7 +16,7 @@
     class="maw-w-2xl flex items-center justify-center p-4 mb-4 border border-secondary rounded-lg bg-secondary/40 text-xl"
     role="alert"
   >
-    <mat-icon fontIcon="check_circle" class="mr-2" />
+    <mat-icon fontIcon="check" class="mr-2" />
     <div>{{this.successMessage}}</div>
   </div>
   }
@@ -67,4 +67,21 @@
     }
   </form>
   }
+  <div class="mt-15 flex flex-col sm:flex-row justify-center gap-4">
+    <p class="self-center">Share this poll :</p>
+    <div class="flex flex-row items-center gap-2 w-full sm:w-auto">
+      <input
+        type="text"
+        [value]="pollLink"
+        readonly
+        class="flex-1 p-2 border border-primary rounded-lg"
+      />
+      <button
+        class="btn bg-primary/80 flex items-center gap-2"
+        (click)="copyLink()"
+      >
+        <mat-icon [fontIcon]="copied ? 'check' : 'content_copy'" />
+      </button>
+    </div>
+  </div>
 </div>

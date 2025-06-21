@@ -18,11 +18,9 @@ export class Poll {
   successMessage = '';
   errorMessage = '';
   copied = false;
-  hasVoted = signal<boolean>(false);
 
   constructor() {
     const pollId = this.route.snapshot.params['id'];
-    this.checkIfVoted(pollId);
 
     this.http.get(`/api/polls/${pollId}`).subscribe({
       next: (response) => {
@@ -41,34 +39,34 @@ export class Poll {
     }
   }
 
-  checkIfVoted(pollId: string) {
+  get pollId() {
+    return this.route.snapshot.params['id'];
+  }
+
+  get hasVoted(): boolean {
     const votedPolls = JSON.parse(localStorage.getItem('votedPolls') || '[]');
-    if (votedPolls.includes(pollId)) {
-      this.hasVoted.set(true);
+    return votedPolls.includes(this.pollId);
+  }
+
+  set hasVoted(value: boolean) {
+    const votedPolls = JSON.parse(localStorage.getItem('votedPolls') || '[]');
+    if (value && !votedPolls.includes(this.pollId)) {
+      votedPolls.push(this.pollId);
+      localStorage.setItem('votedPolls', JSON.stringify(votedPolls));
     }
   }
 
   submitVote() {
-    if (!this.selectedOption || this.hasVoted()) {
+    if (!this.selectedOption || this.hasVoted) {
       return;
     }
-
-    const pollId = this.pollData()._id;
-
     this.http
-      .post(`/api/polls/${pollId}/vote`, {
+      .post(`/api/polls/${this.pollId}/vote`, {
         optionId: this.selectedOption,
       })
       .subscribe({
         next: (response) => {
-          // Mark this poll as voted in localStorage
-          const votedPolls = JSON.parse(
-            localStorage.getItem('votedPolls') || '[]'
-          );
-          votedPolls.push(pollId);
-          localStorage.setItem('votedPolls', JSON.stringify(votedPolls));
-
-          this.hasVoted.set(true);
+          this.hasVoted = true;
           this.successMessage = 'Thank you for voting!';
         },
         error: (error) => {
@@ -79,8 +77,7 @@ export class Poll {
   }
 
   get pollLink() {
-    const pollId = this.route.snapshot.params['id'];
-    return pollId ? `${window.location.origin}/poll/${pollId}` : '';
+    return this.pollId ? `${window.location.origin}/poll/${this.pollId}` : '';
   }
 
   copyLink() {

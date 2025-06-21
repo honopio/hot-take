@@ -30,6 +30,9 @@ html {
   &:hover {
     opacity: 0.8; // This affects the whole button (text, border, etc.)
   }
+  &:disabled:hover {
+    @apply opacity-50;
+  }
 }
 
 h1 {

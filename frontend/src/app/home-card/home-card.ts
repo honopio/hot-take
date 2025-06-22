@@ -19,6 +19,6 @@ import { MatIcon } from '@angular/material/icon';
 export class HomeCard {
   icon = input('bar_chart');
   title = input('Polls');
-  description = input('Create and manage polls easily.');
+  description = input('');
   color = input('primary');
 }

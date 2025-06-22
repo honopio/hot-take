@@ -16,14 +16,17 @@
     <span class="text-black">or</span>
     <div class="flex gap-4">
       <input
-        #pollInput
+        #pollId
         type="text"
-        placeholder="Enter poll ID or link"
+        placeholder="Enter poll id or link"
+        (keyup.enter)="pollInput && joinPoll(pollId.value)"
+        [(ngModel)]="pollInput"
         class="px-4 py-2 border rounded-lg focus:outline-none text-black"
       />
       <button
         class="btn bg-transparent text-black"
-        (click)="joinPoll(pollInput.value)"
+        (click)="joinPoll(pollId.value)"
+        [disabled]="!pollInput"
       >
         Join Poll
       </button>

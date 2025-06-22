@@ -1,16 +1,17 @@
 import { Component, inject } from '@angular/core';
-import { MatIcon } from '@angular/material/icon';
 import { Router, RouterLink } from '@angular/router';
 import { HomeCard } from '../home-card/home-card';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  imports: [MatIcon, RouterLink, HomeCard],
+  imports: [RouterLink, HomeCard, FormsModule],
   templateUrl: './home.html',
   styleUrls: ['./home.scss'],
 })
 export class Home {
-  private router = inject(Router);
+  constructor(private router: Router) {}
+  pollInput: string = '';
 
   joinPoll(pollInput: string) {
     let pollId = pollInput.trim();

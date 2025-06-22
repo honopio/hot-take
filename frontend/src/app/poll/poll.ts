@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -11,15 +11,13 @@ import { NgClass } from '@angular/common';
   templateUrl: './poll.html',
 })
 export class Poll {
-  private http = inject(HttpClient);
-  private route = inject(ActivatedRoute);
   pollData = signal<any>(null);
   selectedOption = '';
   successMessage = '';
   errorMessage = '';
   copied = false;
 
-  constructor() {
+  constructor(private http: HttpClient, private route: ActivatedRoute) {
     const pollId = this.route.snapshot.params['id'];
 
     this.http.get(`/api/polls/${pollId}`).subscribe({

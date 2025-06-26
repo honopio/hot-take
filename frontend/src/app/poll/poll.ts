@@ -4,37 +4,46 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { NgClass } from '@angular/common';
+import { PollResults } from '../poll-results/poll-results';
+import { PollModel } from '../types/poll.types';
 
 @Component({
   selector: 'app-poll',
-  imports: [RouterLink, MatIcon, FormsModule, NgClass],
+  imports: [RouterLink, MatIcon, FormsModule, NgClass, PollResults],
   templateUrl: './poll.html',
 })
 export class Poll {
-  pollData = signal<any>(null);
+  pollData = signal<PollModel>({
+    _id: '',
+    title: '',
+    options: [],
+    createdAt: '',
+  });
   selectedOption = '';
   successMessage = '';
   errorMessage = '';
   copied = false;
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {
-    const pollId = this.route.snapshot.params['id'];
+    this.fetchPoll();
+    const nav = window.history.state;
+    if (nav && nav.success) {
+      this.successMessage = 'Poll created!';
+      history.replaceState({}, document.title);
+    }
+  }
 
+  fetchPoll() {
+    const pollId = this.route.snapshot.params['id'];
     this.http.get(`/api/polls/${pollId}`).subscribe({
       next: (response) => {
-        this.pollData.set(response);
+        this.pollData.set(response as PollModel);
       },
       error: (error) => {
         console.error('Error fetching poll:', error);
         this.errorMessage = 'Sorry, we could not find that poll.';
       },
     });
-
-    const nav = window.history.state;
-    if (nav && nav.success) {
-      this.successMessage = 'Poll created!';
-      history.replaceState({}, document.title);
-    }
   }
 
   get pollId() {
@@ -64,6 +73,7 @@ export class Poll {
       })
       .subscribe({
         next: (response) => {
+          this.fetchPoll();
           this.hasVoted = true;
           this.successMessage = 'Thank you for voting!';
         },

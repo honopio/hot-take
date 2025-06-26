@@ -1,0 +1,17 @@
+@if (chartOptions) {
+<div id="chart">
+  <apx-chart
+    [series]="chartOptions.series || []"
+    [chart]="chartOptions.chart || { type: 'bar' }"
+    [plotOptions]="chartOptions.plotOptions || {}"
+    [xaxis]="chartOptions.xaxis || {}"
+    [yaxis]="chartOptions.yaxis || {}"
+    [tooltip]="chartOptions.tooltip || {}"
+    [dataLabels]="chartOptions.dataLabels || {}"
+  ></apx-chart>
+</div>
+} @else {
+<div class="flex justify-center items-center">
+  <h3>No results available yet</h3>
+</div>
+}

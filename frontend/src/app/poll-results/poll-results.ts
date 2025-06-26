@@ -68,6 +68,9 @@ export class PollResults {
         max: maxVotes + 1,
         stepSize: 1,
         labels: {
+          style: {
+            colors: 'var(--color-text)',
+          },
           formatter: (value: string) => {
             return Number(value).toString();
           },

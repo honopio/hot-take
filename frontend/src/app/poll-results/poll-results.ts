@@ -1,10 +1,4 @@
-import {
-  Component,
-  input,
-  ViewChild,
-  effect,
-  HostListener,
-} from '@angular/core';
+import { Component, input, effect, HostListener } from '@angular/core';
 import { ChartComponent, ApexOptions } from 'ng-apexcharts';
 import { PollModel } from '../types/poll.types';
 
@@ -19,6 +13,12 @@ export class PollResults {
   chart!: ChartComponent;
   public chartOptions!: Partial<ApexOptions>;
   private isMobile = window.innerWidth < 600;
+
+  constructor() {
+    effect(() => {
+      this.updateChartOptions();
+    });
+  }
 
   @HostListener('window:resize')
   onResize() {
@@ -94,11 +94,5 @@ export class PollResults {
         enabled: false,
       },
     };
-  }
-
-  constructor() {
-    effect(() => {
-      this.updateChartOptions();
-    });
   }
 }

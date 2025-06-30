@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -6,13 +6,14 @@ import { MatIcon } from '@angular/material/icon';
 import { NgClass } from '@angular/common';
 import { PollResults } from '../poll-results/poll-results';
 import { PollModel } from '../types/poll.types';
+import { SocketService } from '../socket.service';
 
 @Component({
   selector: 'app-poll',
   imports: [RouterLink, MatIcon, FormsModule, NgClass, PollResults],
   templateUrl: './poll.html',
 })
-export class Poll {
+export class Poll implements OnDestroy {
   pollData = signal<PollModel>({
     _id: '',
     title: '',
@@ -24,13 +25,34 @@ export class Poll {
   errorMessage = '';
   copied = false;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) {
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private socketService: SocketService
+  ) {
     this.fetchPoll();
+    this.setupSocketListeners();
+
     const nav = window.history.state;
     if (nav && nav.success) {
       this.successMessage = 'Poll created!';
       history.replaceState({}, document.title);
     }
+  }
+
+  ngOnDestroy() {
+    // remove socket listeners when component is destroyed
+    this.socketService.removeVotesListener();
+    this.socketService.leavePoll(this.pollId);
+  }
+
+  private setupSocketListeners() {
+    // Join the poll room and listen for vote updates
+    this.socketService.joinPoll(this.pollId);
+    this.socketService.onVotesUpdated((updatedPollData) => {
+      console.log('Real-time poll update received:', updatedPollData);
+      this.pollData.set(updatedPollData);
+    });
   }
 
   fetchPoll() {
@@ -73,7 +95,6 @@ export class Poll {
       })
       .subscribe({
         next: (response) => {
-          this.fetchPoll();
           this.hasVoted = true;
           this.successMessage = 'Thank you for voting!';
         },

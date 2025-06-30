@@ -2,9 +2,9 @@
 <div class="bg-background rounded-xl border p-2 sm:p-6">
   <!-- Results Header -->
   <div class="flex items-center justify-between mb-6">
-    <h3 class="text-lg font-semibold text-text">Poll Results</h3>
+    <h3 class="text-lg font-semibold">Thanks for voting!</h3>
     <div class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">
-      {{ totalVotes }} {{ totalVotes === 1 ? 'vote' : 'votes' }}
+      {{ totalVotes }}
     </div>
   </div>
 
@@ -40,7 +40,10 @@
   </div>
 </div>
 } @else {
-<div class="flex justify-center items-center">
-  <h3>No results available yet</h3>
+<div class="text-center my-15 sm:my-30">
+  <div
+    class="animate-spin mx-auto mb-4 h-8 w-8 border-b-2 border-primary rounded-full"
+  ></div>
+  <h3>Loading results...</h3>
 </div>
 }

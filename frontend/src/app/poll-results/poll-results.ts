@@ -29,6 +29,16 @@ export class PollResults {
     }
   }
 
+  get totalVotes(): number {
+    const data = this.pollData();
+    if (!data?.options) return 0;
+    let total = 0;
+    for (const option of data.options) {
+      total += option.votes;
+    }
+    return total;
+  }
+
   private updateChartOptions() {
     const data = this.pollData();
     if (!data || !data.options || data.options.length === 0) {
@@ -46,7 +56,7 @@ export class PollResults {
       ],
       chart: {
         type: 'bar',
-        height: 350,
+        height: Math.max(300, data.options.length * 60),
       },
       plotOptions: {
         bar: {
@@ -86,13 +96,29 @@ export class PollResults {
         },
       },
       tooltip: {
+        intersect: false,
         style: {
           fontSize: '14px',
         },
       },
-      dataLabels: {
-        enabled: false,
+      legend: {
+        show: false,
       },
+      responsive: [
+        {
+          breakpoint: 600,
+          options: {
+            yaxis: {
+              labels: {
+                style: {
+                  fontSize: '11px',
+                },
+                maxWidth: 100,
+              },
+            },
+          },
+        },
+      ],
     };
   }
 }

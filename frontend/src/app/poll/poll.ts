@@ -63,7 +63,7 @@ export class Poll implements OnDestroy {
       },
       error: (error) => {
         console.error('Error fetching poll:', error);
-        this.errorMessage = 'Sorry, we could not find that poll.';
+        this.errorMessage = 'Poll not found';
       },
     });
   }

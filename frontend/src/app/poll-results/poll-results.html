@@ -1,17 +1,49 @@
-@if (chartOptions) {
-<div id="chart">
-  <apx-chart
-    [series]="chartOptions.series || []"
-    [chart]="chartOptions.chart || { type: 'bar' }"
-    [plotOptions]="chartOptions.plotOptions || {}"
-    [xaxis]="chartOptions.xaxis || {}"
-    [yaxis]="chartOptions.yaxis || {}"
-    [tooltip]="chartOptions.tooltip || {}"
-    [dataLabels]="chartOptions.dataLabels || {}"
-  ></apx-chart>
+@if (chartOptions && totalVotes > 0) {
+<div class="bg-background rounded-xl border p-2 sm:p-6">
+  <!-- Results Header -->
+  <div class="flex items-center justify-between mb-6">
+    <h3 class="text-lg font-semibold">Thanks for voting!</h3>
+    <div class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">
+      {{ totalVotes }}
+    </div>
+  </div>
+
+  <!-- Chart Container -->
+  <div class="relative">
+    <!-- Chart -->
+    <apx-chart
+      [series]="chartOptions.series || []"
+      [chart]="chartOptions.chart || { type: 'bar' }"
+      [plotOptions]="chartOptions.plotOptions || {}"
+      [xaxis]="chartOptions.xaxis || {}"
+      [yaxis]="chartOptions.yaxis || {}"
+      [tooltip]="chartOptions.tooltip || {}"
+      [legend]="chartOptions.legend || {}"
+      [responsive]="chartOptions.responsive || []"
+    ></apx-chart>
+  </div>
+
+  <!-- Summary Stats -->
+  <div class="mt-6 pt-4 border-t border-secondary-text">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+      @for (option of pollData()?.options; track option.optionId; let i =
+      $index) {
+      <div class="border border-text rounded-lg p-3">
+        <div class="text-xs mb-1">OPTION {{ i + 1 }}</div>
+        <div class="text-lg font-bold text-primary">
+          {{ ((option.votes / totalVotes) * 100).toFixed(1) }}%
+        </div>
+        <div class="text-sm text-text truncate">{{ option.text }}</div>
+      </div>
+      }
+    </div>
+  </div>
 </div>
 } @else {
-<div class="flex justify-center items-center">
-  <h3>No results available yet</h3>
+<div class="text-center my-15 sm:my-30">
+  <div
+    class="animate-spin mx-auto mb-4 h-8 w-8 border-b-2 border-primary rounded-full"
+  ></div>
+  <h3>Loading results...</h3>
 </div>
 }

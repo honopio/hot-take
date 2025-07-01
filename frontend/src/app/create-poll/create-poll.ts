@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink, Router } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -11,12 +11,11 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './create-poll.scss',
 })
 export class CreatePoll {
-  constructor(private http: HttpClient) {}
-
-  @ViewChild('pollForm') pollForm!: NgForm;
   options: string[] = ['', ''];
   pollTitle: string = '';
-  private router = inject(Router);
+  @ViewChild('pollForm') pollForm!: NgForm;
+
+  constructor(private http: HttpClient, private router: Router) {}
 
   addOption() {
     if (this.options.length < 10) {

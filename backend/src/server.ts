@@ -15,6 +15,10 @@ const io = new Server(server, {
   cors: { origin: "*" },
 });
 
+app.get("/test", (req, res) => {
+  res.status(200).json({ status: "OK", timestamp: new Date().toISOString() });
+});
+
 // Get a poll
 app.get("/api/polls/:id", async (req, res) => {
   if (!ObjectId.isValid(req.params.id)) {

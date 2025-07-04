@@ -3,30 +3,33 @@ services:
   backend:
     build: 
       context: ./backend
-      dockerfile: Dockerfile.prod
+      dockerfile: Dockerfile.dev
     container_name: polls-backend
     ports:
       - "3000:3000"
     environment:
-      - NODE_ENV=production
-      - PORT=3000
+      - NODE_ENV=development
+    env_file:
+      - ./backend/.env # to retrieve MONGODB_URI from .env file
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
     networks:
       - polls-network
-    restart: unless-stopped
 
   # Frontend Angular app
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile.prod
+      dockerfile: Dockerfile.dev
     container_name: polls-frontend
     ports:
-      - "80:80" # for production
-    depends_on:
-      - backend
+      - "4200:4200" # for development
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
     networks:
       - polls-network
-    restart: unless-stopped
 
 networks:
   polls-network:

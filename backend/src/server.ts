@@ -5,6 +5,8 @@ import { ObjectId } from "mongodb";
 import createHttpError from "http-errors";
 import { Server } from "socket.io";
 
+import path from "path";
+
 const app = express();
 const port = process.env.PORT || 3000;
 const mongodb_uri = process.env.MONGODB_URI || "";
@@ -74,6 +76,18 @@ app.post("/api/polls/:id/vote", async (req, res) => {
     res.status(200).json({ message: "Vote counted" });
   } else {
     throw createHttpError(404, "Poll or option not found");
+  }
+});
+
+// serve static files from Angular build
+app.use(express.static(path.join(__dirname, "../public")));
+
+// angular routing
+app.get(/(.*)/, (req, res) => {
+  if (req.path.startsWith("/api/")) {
+    res.status(404).json({ message: "API endpoint not found" });
+  } else {
+    res.sendFile(path.join(__dirname, "../public/index.html"));
   }
 });
 

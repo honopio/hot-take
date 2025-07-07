@@ -1,0 +1,15 @@
+{
+  "/api": {
+    "target": "http://polls-backend:3000",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+  "/socket.io": {
+    "target": "http://polls-backend:3000",
+    "secure": false,
+    "ws": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

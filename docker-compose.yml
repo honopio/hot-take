@@ -1,0 +1,33 @@
+services:
+  # Backend API
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile.prod
+    container_name: polls-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    networks:
+      - polls-network
+    restart: unless-stopped
+
+  # Frontend Angular app
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    container_name: polls-frontend
+    ports:
+      - "80:80" # for production
+    depends_on:
+      - backend
+    networks:
+      - polls-network
+    restart: unless-stopped
+
+networks:
+  polls-network:
+    driver: bridge

@@ -1,8 +1,8 @@
-<div class="max-w-6xl mx-auto my-10 sm:border rounded-xl p-3 sm:p-8">
+<div class="max-w-6xl mx-auto my-10 sm:border bg-card-bg rounded-xl p-3 sm:p-8">
   <form #pollForm="ngForm" (ngSubmit)="createPoll()" novalidate>
     <!-- header -->
     <button
-      class="btn bg-secondary text-black flex items-center gap-2 mb-6"
+      class="btn bg-secondary text-black flex items-center gap-2 mb-6 hover:bg-card-bg hover:text-text"
       routerLink="/"
     >
       <mat-icon fontIcon="arrow_back"></mat-icon>

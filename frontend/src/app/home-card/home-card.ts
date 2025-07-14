@@ -6,9 +6,10 @@ import { MatIcon } from '@angular/material/icon';
   imports: [MatIcon],
   template: `<div class="rounded-xl p-8 border border-text h-full">
     <div
-      class="w-16 h-16 bg-{{
+      [class]="
+        'w-16 h-16 rounded-full border border-black flex items-center justify-center mb-6 mx-auto bg-' +
         color()
-      }} rounded-full border border-black flex items-center justify-center mb-6 mx-auto"
+      "
     >
       <mat-icon fontIcon="{{ icon() }}" style="color: black"></mat-icon>
     </div>

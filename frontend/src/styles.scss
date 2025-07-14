@@ -4,6 +4,7 @@
   --color-text: #070107; // black
   --color-secondary-text: #a4a4a4; // gray
   --color-background: #ffffff;
+  --color-card-bg: #ffffff;
   --color-primary: #f1704a; // orange
   --color-secondary: #c4e99d; // light green
   --color-accent: #ffec3a; // yellow
@@ -14,6 +15,7 @@
   .dark {
     --color-text: #f7f6f9;
     --color-background: #161616;
+    --color-card-bg: #1a1a1a;
   }
 }
 

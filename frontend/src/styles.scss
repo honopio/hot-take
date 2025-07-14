@@ -3,7 +3,7 @@
 @theme {
   --color-text: #070107; // black
   --color-secondary-text: #a4a4a4; // gray
-  --color-background: #ffffff; // light sage
+  --color-background: #ffffff;
   --color-primary: #f1704a; // orange
   --color-secondary: #c4e99d; // light green
   --color-accent: #ffec3a; // yellow
@@ -27,9 +27,9 @@ html {
   &:disabled {
     @apply opacity-50 scale-100 cursor-auto;
   }
-  &:hover {
-    opacity: 0.8; // This affects the whole button (text, border, etc.)
-  }
+  // &:hover {
+  //   opacity: 0.8; // This affects the whole button (text, border, etc.)
+  // }
   &:disabled:hover {
     @apply opacity-50;
   }

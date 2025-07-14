@@ -32,7 +32,7 @@
           name="pollTitle"
           type="text"
           placeholder="e.g., Where should we go in July?"
-          class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:placeholder-transparent placeholder:text-secondary-text"
+          class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-3 focus:ring-secondary focus:border-transparent focus:placeholder-transparent placeholder:text-secondary-text"
           [(ngModel)]="pollTitle"
           required
           #pollTitleInput="ngModel"
@@ -72,7 +72,7 @@
                 name="option{{i}}"
                 [placeholder]="'Option ' + (i + 1)"
                 maxlength="100"
-                class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary transition-all focus:placeholder-transparent placeholder:text-secondary-text"
+                class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-3 focus:ring-secondary focus:border-transparent transition-all focus:placeholder-transparent placeholder:text-secondary-text"
                 [(ngModel)]="options[i]"
                 required
                 #optionInput="ngModel"
@@ -108,7 +108,7 @@
         <div class="flex justify-center">
           <button
             type="button"
-            class="btn flex items-center justify-center gap-2 bg-secondary hover:bg-opacity-80 text-black"
+            class="btn flex items-center justify-center gap-2 bg-secondary text-black hover:bg-card-bg hover:text-text"
             (click)="addOption()"
           >
             <mat-icon fontIcon="add_circle"></mat-icon>
@@ -131,12 +131,15 @@
       <div class="flex flex-row gap-4 justify-center items-center">
         <button
           type="button"
-          class="btn hover:bg-secondary hover:text-black"
+          class="btn bg-secondary text-black hover:bg-card-bg hover:text-text"
           (click)="resetForm()"
         >
           Reset Form
         </button>
-        <button type="submit" class="btn bg-black border text-white flex">
+        <button
+          type="submit"
+          class="btn bg-text text-background border flex hover:scale-105 transition-transform"
+        >
           <mat-icon fontIcon="poll" class="mr-2"></mat-icon>
           Create Poll
         </button>
@@ -145,17 +148,13 @@
       <!-- form status -->
       <div class="mt-4 text-center">
         @if (!pollForm.valid && pollForm.submitted) {
-        <div
-          class="text-sm text-primary flex items-center justify-center gap-1"
-        >
-          <mat-icon fontIcon="info" class="text-sm"></mat-icon>
+        <div class="text-primary flex items-center justify-center gap-1">
+          <mat-icon fontIcon="info"></mat-icon>
           Please fill in all fields to create your poll
         </div>
         } @else if (pollForm.valid && pollForm.submitted) {
-        <div
-          class="text-sm text-green-600 flex items-center justify-center gap-1"
-        >
-          <mat-icon fontIcon="check_circle" class="text-sm"></mat-icon>
+        <div class="text-validation flex items-center justify-center gap-1">
+          <mat-icon fontIcon="check_circle"></mat-icon>
           Your poll is ready!
         </div>
         }

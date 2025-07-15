@@ -1,29 +1,31 @@
-<div class="max-w-6xl mx-auto my-10 sm:border bg-card-bg rounded-xl p-3 sm:p-8">
+<div
+  class="max-w-6xl mx-auto my-10 sm:border bg-card-bg rounded-xl p-6 sm:p-20"
+>
   <form #pollForm="ngForm" (ngSubmit)="createPoll()" novalidate>
     <!-- header -->
     <button
-      class="btn bg-secondary text-black flex items-center gap-2 mb-6 hover:bg-card-bg hover:text-text"
+      class="btn bg-secondary text-black flex items-center gap-2 mb-6 hover:bg-validation"
       routerLink="/"
     >
       <mat-icon fontIcon="arrow_back"></mat-icon>
       Back
     </button>
-    <div class="max-w-4xl mx-auto mb-8 flex flex-col items-center">
+    <div class="max-w-4xl mx-auto mb-8 sm:mb-15 flex flex-col items-center">
       <div class="relative inline-block mx-auto">
         <span
           class="absolute left-0 right-0 bottom-3 sm:bottom-5 h-3 sm:h-5 bg-accent/60"
         ></span>
-        <h1 class="text-center relative z-10 px-2">Create Your Poll</h1>
+        <h1 class="text-center relative z-10 px-2">Create your poll</h1>
       </div>
       <p class="text-center text-secondary-text text-lg max-w-2xl mx-auto">
         Design your poll question and add options to choose from
       </p>
     </div>
 
-    <!-- poll title action -->
-    <div class="mb-8">
+    <!-- poll title -->
+    <div class="mb-8 bg-secondary/10 border border-secondary rounded-xl p-6">
       <label class="block text-lg mb-5" for="poll-title">
-        Poll Question
+        Poll question
         <span class="text-primary ml-1">*</span>
       </label>
       <div class="relative">
@@ -32,7 +34,7 @@
           name="pollTitle"
           type="text"
           placeholder="e.g., Where should we go in July?"
-          class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-3 focus:ring-secondary focus:border-transparent focus:placeholder-transparent placeholder:text-secondary-text"
+          class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-3 focus:ring-validation focus:border-transparent focus:placeholder-transparent placeholder:text-secondary-text"
           [(ngModel)]="pollTitle"
           required
           #pollTitleInput="ngModel"
@@ -53,7 +55,7 @@
     <!-- options section -->
     <div class="mb-8">
       <label class="text-lg mb-3 block font-medium">
-        Poll Options
+        Poll options
         <span class="text-primary ml-1">*</span>
       </label>
 
@@ -108,7 +110,7 @@
         <div class="flex justify-center">
           <button
             type="button"
-            class="btn flex items-center justify-center gap-2 bg-secondary text-black hover:bg-card-bg hover:text-text"
+            class="btn flex items-center justify-center gap-2 hover:bg-secondary hover:text-black"
             (click)="addOption()"
           >
             <mat-icon fontIcon="add_circle"></mat-icon>
@@ -131,17 +133,17 @@
       <div class="flex flex-row gap-4 justify-center items-center">
         <button
           type="button"
-          class="btn bg-secondary text-black hover:bg-card-bg hover:text-text"
+          class="btn bg-secondary text-black hover:bg-validation hover:text-text"
           (click)="resetForm()"
         >
-          Reset Form
+          Reset form
         </button>
         <button
           type="submit"
-          class="btn bg-text text-background border flex hover:scale-105 transition-transform"
+          class="btn bg-text text-background border flex hover:scale-105 transition-transform duration-150"
         >
           <mat-icon fontIcon="poll" class="mr-2"></mat-icon>
-          Create Poll
+          Create poll
         </button>
       </div>
 

@@ -3,9 +3,11 @@
 @theme {
   --color-text: #070107; // black
   --color-secondary-text: #a4a4a4; // gray
-  --color-background: #ffffff; // light sage
+  --color-background: #ffffff;
+  --color-card-bg: #ffffff;
   --color-primary: #f1704a; // orange
   --color-secondary: #c4e99d; // light green
+  --color-validation: #b2d48d; // light green
   --color-accent: #ffec3a; // yellow
 }
 
@@ -14,6 +16,7 @@
   .dark {
     --color-text: #f7f6f9;
     --color-background: #161616;
+    --color-card-bg: #1a1a1a;
   }
 }
 
@@ -27,11 +30,18 @@ html {
   &:disabled {
     @apply opacity-50 scale-100 cursor-auto;
   }
-  &:hover {
-    opacity: 0.8; // This affects the whole button (text, border, etc.)
-  }
+  // &:hover {
+  //   opacity: 0.8; // This affects the whole button (text, border, etc.)
+  // }
   &:disabled:hover {
     @apply opacity-50;
+  }
+}
+
+.hover-bigger {
+  @apply transition-transform duration-200 ease-in-out px-6 py-3 text-lg;
+  &:hover {
+    @apply scale-105;
   }
 }
 

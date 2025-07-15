@@ -100,6 +100,9 @@ export class PollResults {
         style: {
           fontSize: '14px',
         },
+        marker: {
+          fillColors: ['#f1704a'],
+        },
       },
       legend: {
         show: false,

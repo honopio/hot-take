@@ -38,6 +38,13 @@ html {
   }
 }
 
+.hover-bigger {
+  @apply transition-transform duration-200 ease-in-out px-6 py-3 text-lg;
+  &:hover {
+    @apply scale-105;
+  }
+}
+
 h1 {
   @apply text-2xl sm:text-4xl lg:text-6xl font-bold my-3 sm:my-6;
 }

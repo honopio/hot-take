@@ -1,6 +1,6 @@
-<div class="max-w-6xl mx-auto my-10 sm:border rounded-xl p-3 sm:p-8">
+<div class="max-w-6xl mx-auto my-10 sm:border rounded-xl p-6 sm:p-20">
   <button
-    class="btn bg-primary text-black flex items-center gap-2 mb-6 hover:bg-card-bg hover:text-text"
+    class="btn bg-primary/80 flex items-center gap-2 mb-6 hover:bg-primary"
     routerLink="/"
   >
     <mat-icon fontIcon="arrow_back" />
@@ -20,7 +20,7 @@
 
   } @else { @if (this.successMessage) {
   <div
-    class="mb-6 p-4 bg-secondary/10 border border-secondary/60 rounded-xl flex items-center justify-center text-validation"
+    class="mb-6 p-4 bg-secondary/10 border border-secondary/60 rounded-xl flex items-center justify-center text-validation font-bold"
     role="alert"
   >
     <mat-icon fontIcon="check" class="mr-2" />
@@ -62,11 +62,10 @@
       }
     </div>
 
-    <div class="flex flex-row gap-4 justify-center items-center">
+    <div class="flex justify-center">
       <button
         type="submit"
-        class="btn font-bold bg-primary/80 flex items-center gap-2 px-6 py-3 text-lg"
-        [disabled]="hasVoted"
+        class="btn hover-bigger bg-primary/80 flex items-center gap-2"
       >
         <mat-icon fontIcon="how_to_vote" class="mr-2 text-xl" />
         Submit Vote
@@ -102,7 +101,7 @@
         type="text"
         [value]="pollLink"
         readonly
-        class="w-full p-3 pr-12 border border-secondary-text rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+        class="w-full p-3 pr-12 border border-secondary-text rounded-xl text-sm focus:outline-none focus:border-transparent focus:ring-2 focus:ring-primary/70"
       />
       <mat-icon
         fontIcon="link"

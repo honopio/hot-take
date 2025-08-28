@@ -1,13 +1,14 @@
-import { Component, input, computed } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-home-card',
-  imports: [MatIcon],
+  imports: [MatIcon, NgClass],
   template: `<div class="rounded-xl p-8 border border-text h-full">
     <div
       class="w-16 h-16 rounded-full border border-black flex items-center justify-center mb-6 mx-auto"
-      [class]="'bg-' + color()"
+      [ngClass]="bgColorClass"
     >
       <mat-icon fontIcon="{{ icon() }}" style="color: black"></mat-icon>
     </div>
@@ -20,4 +21,8 @@ export class HomeCard {
   title = input('Polls');
   description = input('');
   color = input('primary');
+
+  get bgColorClass() {
+    return `bg-${this.color()}`;
+  }
 }

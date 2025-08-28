@@ -9,6 +9,8 @@
   --color-secondary: #c4e99d; // light green
   --color-validation: #b2d48d; // light green
   --color-accent: #ffec3a; // yellow
+  --color-border: #e5e5e5;
+  --color-surface: #fafafa;
 }
 
 @layer base {
@@ -17,24 +19,40 @@
     --color-text: #f7f6f9;
     --color-background: #161616;
     --color-card-bg: #1a1a1a;
+    --color-border: #333;
+    --color-surface: #222;
   }
 }
 
 html {
-  @apply text-text bg-background;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  @apply text-text bg-background antialiased;
   transition: background-color 0.3s, color 0.3s;
 }
 
 .btn {
   @apply px-4 py-2 rounded-lg font-semibold border transition-colors transition-transform cursor-pointer;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
   &:disabled {
     @apply opacity-50 scale-100 cursor-auto;
   }
-  // &:hover {
-  //   opacity: 0.8; // This affects the whole button (text, border, etc.)
-  // }
   &:disabled:hover {
     @apply opacity-50;
+    transform: none;
+  }
+
+  &.btn-ghost {
+    background: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
   }
 }
 
@@ -42,6 +60,36 @@ html {
   @apply transition-transform duration-200 ease-in-out px-6 py-3 text-lg;
   &:hover {
     @apply scale-105;
+  }
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  @apply rounded-xl p-6 sm:p-8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+}
+
+.container-max {
+  @apply max-w-6xl mx-auto px-6;
+}
+
+input,
+textarea {
+  @apply px-4 py-3 rounded-lg border-2;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-color: var(--color-border);
+  transition: all 0.2s ease;
+
+  &::placeholder {
+    color: var(--color-secondary-text);
   }
 }
 

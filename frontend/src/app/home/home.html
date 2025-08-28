@@ -1,6 +1,6 @@
 <!-- Hero Section -->
 <div
-  class="px-6 py-8 sm:py-16 max-w-6xl mx-auto my-5 md:my-15 text-center rounded-xl bg-secondary border-2 border-black"
+  class="px-6 py-8 sm:py-16 max-w-6xl mx-auto my-5 md:my-15 text-center sm:rounded-xl bg-secondary sm:border-2 sm:border-black"
 >
   <h1 class="text-black">Create & share polls instantly</h1>
   <p class="text-lg sm:text-xl text-black mb-6 sm:mb-12 max-w-2xl mx-auto">
@@ -24,12 +24,10 @@
         placeholder="Enter poll id or link"
         (keyup.enter)="pollInput && joinPoll(pollId.value)"
         [(ngModel)]="pollInput"
-        class="px-4 py-2 border rounded-lg focus:outline-none text-black"
+        class="px-4 py-2 rounded-lg border-black"
       />
       <button
-        class="btn bg-transparent text-black"
-        [class.hover:bg-validation]="pollInput"
-        [class.hover:text-black]="pollInput"
+        class="btn"
         (click)="joinPoll(pollId.value)"
         [disabled]="!pollInput"
       >
@@ -40,27 +38,52 @@
 </div>
 
 <!-- How It Works Section -->
-<div class="px-6 py-8 sm:py-16 max-w-6xl mx-auto">
-  <h2>How It Works</h2>
+<div class="py-12 sm:py-16 bg-surface">
+  <div class="container-max">
+    <div class="text-center mb-12">
+      <h2>How It Works</h2>
+      <p class="text-lg text-secondary-text max-w-2xl mx-auto">
+        Create polls in three steps
+      </p>
+    </div>
 
-  <div class="mt-10 grid md:grid-cols-3 gap-8">
-    <app-home-card
-      icon="add"
-      title="Create a Poll"
-      description="Design your poll with custom questions and multiple choice options."
-      color="accent"
-    ></app-home-card>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="card border border-border text-center group">
+        <div
+          class="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 bg-accent text-black"
+        >
+          <mat-icon class="text-2xl text-black">create</mat-icon>
+        </div>
+        <h3>Create your poll</h3>
+        <p class="text-secondary-text">
+          Design your poll with custom questions and multiple choice options.
+        </p>
+      </div>
 
-    <app-home-card
-      icon="share"
-      title="Share your Poll"
-      description="Share your poll instantly with a simple link or poll ID. It can be joined from any device."
-      color="secondary"
-    ></app-home-card>
+      <div class="card border border-border text-center group">
+        <div
+          class="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 bg-green text-black"
+        >
+          <mat-icon class="text-2xl text-black">share</mat-icon>
+        </div>
+        <h3>Share instantly</h3>
+        <p class="text-secondary-text">
+          Share your poll with a simple link or poll ID. Works on any device,
+          anywhere
+        </p>
+      </div>
 
-    <app-home-card
-      title="View results"
-      description="Watch results update in real-time as votes come in."
-    ></app-home-card>
+      <div class="card border border-border text-center group">
+        <div
+          class="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 bg-primary text-black"
+        >
+          <mat-icon class="text-2xl text-white">analytics</mat-icon>
+        </div>
+        <h3>View results</h3>
+        <p class="text-secondary-text">
+          Watch results update in real-time with charts and analytics
+        </p>
+      </div>
+    </div>
   </div>
 </div>

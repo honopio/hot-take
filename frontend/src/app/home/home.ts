@@ -1,11 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { HomeCard } from '../home-card/home-card';
 import { FormsModule } from '@angular/forms';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, HomeCard, FormsModule],
+  imports: [RouterLink, FormsModule, MatIcon],
   templateUrl: './home.html',
   styleUrls: ['./home.scss'],
 })

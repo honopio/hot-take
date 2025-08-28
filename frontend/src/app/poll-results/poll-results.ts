@@ -67,7 +67,7 @@ export class PollResults {
               {
                 from: 0,
                 to: 1000,
-                color: '#f1704a',
+                color: 'var(--color-green)',
               },
             ],
           },
@@ -101,7 +101,7 @@ export class PollResults {
           fontSize: '14px',
         },
         marker: {
-          fillColors: ['#f1704a'],
+          fillColors: ['var(--color-green)'],
         },
       },
       legend: {

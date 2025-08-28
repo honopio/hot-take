@@ -5,10 +5,14 @@
   --color-secondary-text: #a4a4a4; // gray
   --color-background: #ffffff;
   --color-card-bg: #ffffff;
-  --color-primary: #f1704a; // orange
-  --color-secondary: #c4e99d; // light green
+  // --color-primary: #f1704a; // orange
+  --color-primary: #fcedd0; // orange
+  // --color-secondary: #c4e99d; // light green
+  --color-secondary: #bfcdfd;
   --color-validation: #b2d48d; // light green
-  --color-accent: #ffec3a; // yellow
+  // --color-accent: #ffec3a; // yellow
+  --color-accent: #fbf8a7; // light green
+  --color-green: #bff5cb; // light green
   --color-border: #e5e5e5;
   --color-surface: #fafafa;
 }
@@ -31,21 +35,17 @@ html {
 }
 
 .btn {
-  @apply px-4 py-2 rounded-lg font-semibold border transition-colors transition-transform cursor-pointer;
+  @apply text-black px-4 py-2 rounded-lg font-semibold border transition-colors transition-transform cursor-pointer;
   background: var(--color-primary);
-  color: white;
-  border: none;
 
   &:hover:not(:disabled) {
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
   &:disabled {
     @apply opacity-50 scale-100 cursor-auto;
   }
   &:disabled:hover {
-    @apply opacity-50;
     transform: none;
   }
 
@@ -80,12 +80,17 @@ html {
   @apply max-w-6xl mx-auto px-6;
 }
 
+.page-container {
+  @apply max-w-6xl mx-auto my-10 p-6 sm:p-20;
+}
+
+.error-message {
+  @apply flex items-center gap-2 text-primary mt-3;
+}
+
 input,
 textarea {
-  @apply px-4 py-3 rounded-lg border-2;
-  background: var(--color-surface);
-  color: var(--color-text);
-  border-color: var(--color-border);
+  @apply px-4 py-3 rounded-lg border bg-surface text-text focus:outline-none;
   transition: all 0.2s ease;
 
   &::placeholder {

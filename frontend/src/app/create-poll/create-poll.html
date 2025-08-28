@@ -3,10 +3,7 @@
 >
   <form #pollForm="ngForm" (ngSubmit)="createPoll()" novalidate>
     <!-- header -->
-    <button
-      class="btn bg-secondary text-black flex items-center gap-2 mb-6 hover:bg-validation"
-      routerLink="/"
-    >
+    <button class="btn flex items-center gap-2 mb-6" routerLink="/">
       <mat-icon fontIcon="arrow_back"></mat-icon>
       Back
     </button>
@@ -34,7 +31,7 @@
           name="pollTitle"
           type="text"
           placeholder="e.g., Where should we go in July?"
-          class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-3 focus:ring-validation focus:border-transparent focus:placeholder-transparent placeholder:text-secondary-text"
+          class="w-full px-4 py-3 border rounded-lg focus:ring-3 focus:ring-secondary focus:border-transparent focus:placeholder-transparent placeholder:text-secondary-text"
           [(ngModel)]="pollTitle"
           required
           #pollTitleInput="ngModel"

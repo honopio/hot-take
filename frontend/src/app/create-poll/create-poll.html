@@ -1,37 +1,32 @@
-<div
-  class="max-w-6xl mx-auto my-10 sm:border bg-card-bg rounded-xl p-6 sm:p-20"
->
+<div class="page-container sm:border bg-card-bg rounded-xl">
   <form #pollForm="ngForm" (ngSubmit)="createPoll()" novalidate>
     <!-- header -->
     <button class="btn flex items-center gap-2 mb-6" routerLink="/">
       <mat-icon fontIcon="arrow_back"></mat-icon>
       Back
     </button>
-    <div class="max-w-4xl mx-auto mb-8 sm:mb-15 flex flex-col items-center">
+    <div class="text-center mb-12">
       <div class="relative inline-block mx-auto">
         <span
           class="absolute left-0 right-0 bottom-3 sm:bottom-5 h-3 sm:h-5 bg-accent/60"
         ></span>
         <h1 class="text-center relative z-10 px-2">Create your poll</h1>
       </div>
-      <p class="text-center text-secondary-text text-lg max-w-2xl mx-auto">
+      <p class="text-secondary-text text-lg max-w-2xl mx-auto">
         Design your poll question and add options to choose from
       </p>
     </div>
 
     <!-- poll title -->
-    <div class="mb-8 bg-secondary/10 border border-secondary rounded-xl p-6">
-      <label class="block text-lg mb-5" for="poll-title">
-        Poll question
-        <span class="text-primary ml-1">*</span>
-      </label>
+    <div class="card mb-8 bg-secondary/50">
+      <label class="block text-lg mb-5" for="poll-title"> Poll question </label>
       <div class="relative">
         <input
           id="poll-title"
           name="pollTitle"
           type="text"
           placeholder="e.g., Where should we go in July?"
-          class="w-full px-4 py-3 border rounded-lg focus:ring-3 focus:ring-secondary focus:border-transparent focus:placeholder-transparent placeholder:text-secondary-text"
+          class="w-full border border-black focus:ring-3 focus:ring-secondary focus:border-transparent"
           [(ngModel)]="pollTitle"
           required
           #pollTitleInput="ngModel"
@@ -42,28 +37,22 @@
         </div>
       </div>
       @if (pollTitleInput.invalid && pollForm.submitted) {
-      <div class="text-primary mt-2 text-sm flex items-center gap-1">
-        <mat-icon fontIcon="info" class="text-sm"></mat-icon>
-        Please enter your question
-      </div>
+      <div class="text-red-500 mt-2 text-sm">Please enter your question</div>
       }
     </div>
 
     <!-- options section -->
-    <div class="mb-8">
-      <label class="text-lg mb-3 block font-medium">
-        Poll options
-        <span class="text-primary ml-1">*</span>
-      </label>
+    <div class="card mb-8 bg-secondary/50">
+      <label class="text-lg mb-3 block font-medium mb-5"> Poll options </label>
 
-      <div class="space-y-4">
+      <div class="space-y-4 mb-6">
         @for (option of options; let i = $index; track i) {
         <div class="group">
           <div class="flex items-center gap-3">
             <div
-              class="w-8 h-8 rounded-full border flex items-center justify-center flex-shrink-0 group-focus-within:bg-secondary group-focus-within:text-black group-focus-within:border-none transition-all"
+              class="w-8 h-8 bg-background rounded-full flex items-center justify-center flex-shrink-0 group-focus-within:bg-secondary group-focus-within:text-black group-focus-within:border-none transition-all"
             >
-              <span class="">{{ i + 1 }}</span>
+              {{ i + 1 }}
             </div>
             <div class="flex-1 relative">
               <input
@@ -71,7 +60,7 @@
                 name="option{{i}}"
                 [placeholder]="'Option ' + (i + 1)"
                 maxlength="100"
-                class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-3 focus:ring-secondary focus:border-transparent transition-all focus:placeholder-transparent placeholder:text-secondary-text"
+                class="w-full px-4 py-3 border border-black rounded-lg focus:outline-none focus:ring-3 focus:ring-secondary focus:border-transparent transition-all focus:placeholder-transparent placeholder:text-secondary-text"
                 [(ngModel)]="options[i]"
                 required
                 #optionInput="ngModel"
@@ -83,7 +72,7 @@
             @if (options.length > 2) {
             <button
               type="button"
-              class="w-8 h-8 flex items-center justify-center text-primary hover:bg-primary hover:text-white rounded-full transition-colors"
+              class="w-8 h-8 flex items-center justify-center text-red-500 hover:bg-red-500 hover:text-white rounded-full transition-colors"
               title="Remove option"
               (click)="removeOption(i)"
             >
@@ -92,8 +81,7 @@
             }
           </div>
           @if (optionInput.invalid && pollForm.submitted) {
-          <div class="text-primary text-sm mt-1 ml-11 flex items-center gap-1">
-            <mat-icon fontIcon="info" class="text-sm"></mat-icon>
+          <div class="text-red-500 text-sm mt-1 ml-11">
             This option cannot be empty
           </div>
           }
@@ -101,24 +89,18 @@
         }
       </div>
 
-      <!-- add option button -->
-      <div class="mt-6">
+      <div class="text-center pt-4">
         @if (options.length < 10) {
-        <div class="flex justify-center">
-          <button
-            type="button"
-            class="btn flex items-center justify-center gap-2 hover:bg-secondary hover:text-black"
-            (click)="addOption()"
-          >
-            <mat-icon fontIcon="add_circle"></mat-icon>
-            <span>Add another option</span>
-            <span class="text-sm text-secondary-text"
-              >({{ options.length }}/10)</span
-            >
-          </button>
-        </div>
+        <button
+          type="button"
+          class="btn flex items-center gap-2 mx-auto"
+          (click)="addOption()"
+        >
+          <mat-icon fontIcon="add_circle"></mat-icon>
+          Add option ({{ options.length }}/10)
+        </button>
         } @else {
-        <div class="text-center text-secondary-text text-sm py-2">
+        <div class="text-secondary-text text-sm">
           Maximum of 10 options reached
         </div>
         }
@@ -132,7 +114,7 @@
           type="submit"
           class="btn hover-bigger bg-text text-background flex items-center gap-2"
         >
-          <mat-icon fontIcon="poll" class="mr-2"></mat-icon>
+          <mat-icon fontIcon="poll"></mat-icon>
           Create poll
         </button>
       </div>

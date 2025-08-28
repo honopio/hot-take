@@ -5,13 +5,10 @@
   --color-secondary-text: #a4a4a4; // gray
   --color-background: #ffffff;
   --color-card-bg: #ffffff;
-  // --color-primary: #f1704a; // orange
   --color-primary: #fcedd0; // orange
-  // --color-secondary: #c4e99d; // light green
   --color-secondary: #bfcdfd;
   --color-validation: #bff5cb; // light green
   --color-validation-text: #98c4a2;
-  // --color-accent: #ffec3a; // yellow
   --color-accent: #fbf8a7; // light green
   --color-green: #bff5cb; // light green
   --color-border: #e5e5e5;
@@ -80,10 +77,6 @@ html {
 
 .page-container {
   @apply max-w-6xl mx-auto my-10 p-6 sm:p-20;
-}
-
-.error-message {
-  @apply flex items-center gap-2 text-primary mt-3;
 }
 
 input,

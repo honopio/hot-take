@@ -1,18 +1,14 @@
 @if (this.successMessage) {
 <div
-  class="max-w-6xl mx-auto mb-6 p-4 bg-validation/20 border border-validation rounded-xl flex items-center justify-center text-validation-text font-bold"
-  role="alert"
+  class="container-max mb-6 p-4 bg-validation/30 border border-validation rounded-xl flex items-center justify-center text-validation-text font-bold"
 >
   <mat-icon fontIcon="check" class="mr-2" />
-  <div>{{this.successMessage}}</div>
+  <div>{{ this.successMessage }}</div>
 </div>
 }
 
-<div class="max-w-6xl mx-auto my-10 sm:border rounded-xl p-6 sm:p-20">
-  <button
-    class="btn bg-primary/80 flex items-center gap-2 mb-6 hover:bg-primary"
-    routerLink="/"
-  >
+<div class="page-container sm:border rounded-xl">
+  <button class="btn btn-ghost flex items-center gap-2 mb-8" routerLink="/">
     <mat-icon fontIcon="arrow_back" />
     Back
   </button>
@@ -29,26 +25,27 @@
   </p>
 
   } @else {
-  <div class="relative mx-auto mb-2 sm:mb-8 flex flex-col items-center w-max">
-    <span
-      class="absolute left-0 right-0 bottom-5 h-3 sm:h-5 bg-primary/80"
-    ></span>
-    <h2 class="text-center relative z-10 px-2">{{ pollData().title }}</h2>
+  <div class="text-center mb-8">
+    <div class="relative inline-block mx-auto">
+      <span
+        class="absolute left-0 right-0 bottom-3 sm:bottom-5 h-3 sm:h-5 bg-secondary/60"
+      ></span>
+      <h2 class="relative z-10 px-2">{{ pollData().title }}</h2>
+    </div>
   </div>
   <!-- display poll results if the user has voted -->
   @if (hasVoted) {
   <app-poll-results [pollData]="pollData()" />
   <!-- display a form if the user hasn't voted -->
   } @else {
-  <form #voteForm="ngForm" (ngSubmit)="submitVote()">
-    <div class="space-y-4 mb-6">
+  <form #voteForm="ngForm" (ngSubmit)="submitVote()" class="mb-8">
+    <div class="space-y-4 mb-8">
       @for (option of pollData().options; track option.optionId) {
       <label
-        class="flex items-center p-4 bg-background border rounded-lg cursor-pointer transition-colors"
-        [ngClass]="{
-              'border-primary border-2 scale-102': selectedOption === option.optionId,
-              'border-gray-200': selectedOption !== option.optionId
-            }"
+        class="flex items-center p-4 bg-surface border-2 rounded-xl cursor-pointer transition-all hover:shadow-md"
+        [class.border-primary]="selectedOption === option.optionId"
+        [class.bg-primary]="selectedOption === option.optionId"
+        [class.border-border]="selectedOption !== option.optionId"
       >
         <input
           type="radio"
@@ -63,18 +60,19 @@
       }
     </div>
 
-    <div class="flex justify-center">
+    <div class="text-center">
       <button
         type="submit"
-        class="btn hover-bigger bg-primary/80 flex items-center gap-2"
+        class="btn hover-bigger bg-text text-background flex items-center gap-2 mx-auto"
       >
-        <mat-icon fontIcon="how_to_vote" class="mr-2 text-xl" />
+        <mat-icon fontIcon="how_to_vote" />
         Submit Vote
       </button>
     </div>
+
     @if (voteForm.submitted && !voteForm.valid) {
     <div
-      class="mt-4 text-sm text-primary flex items-center justify-center gap-1"
+      class="mt-4 text-sm text-red-500 flex items-center justify-center gap-1"
     >
       <mat-icon fontIcon="info" class="text-sm" />
       Please select an option

@@ -73,6 +73,10 @@ html {
 
 .container-max {
   @apply max-w-6xl mx-auto px-6;
+
+  @media (max-width: 640px) {
+    @apply mx-6;
+  }
 }
 
 .page-container {

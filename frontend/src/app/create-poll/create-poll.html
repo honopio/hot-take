@@ -1,7 +1,7 @@
 <div class="page-container sm:border bg-card-bg rounded-xl">
   <form #pollForm="ngForm" (ngSubmit)="createPoll()" novalidate>
     <!-- header -->
-    <button class="btn flex items-center gap-2 mb-6" routerLink="/">
+    <button class="btn btn-ghost flex items-center gap-2 mb-6" routerLink="/">
       <mat-icon fontIcon="arrow_back"></mat-icon>
       Back
     </button>
@@ -18,7 +18,7 @@
     </div>
 
     <!-- poll title -->
-    <div class="card mb-8 bg-secondary/50 border-black border">
+    <div class="card mb-8 bg-secondary/30 border-black border">
       <label class="block text-lg mb-5" for="poll-title"> Poll question </label>
       <div class="relative">
         <input
@@ -42,7 +42,7 @@
     </div>
 
     <!-- options section -->
-    <div class="card mb-8 bg-secondary/50 border border-black">
+    <div class="card mb-8 bg-secondary/30 border border-black">
       <label class="text-lg mb-3 block font-medium mb-5"> Poll options </label>
 
       <div class="space-y-4 mb-6">
@@ -93,7 +93,7 @@
         @if (options.length < 10) {
         <button
           type="button"
-          class="btn flex items-center gap-2 mx-auto"
+          class="btn flex items-center gap-2 mx-auto hover:bg-secondary hover:border-secondary hover:text-black"
           (click)="addOption()"
         >
           <mat-icon fontIcon="add_circle"></mat-icon>
@@ -122,7 +122,7 @@
       <!-- form status -->
       <div class="mt-4 text-center">
         @if (!pollForm.valid && pollForm.submitted) {
-        <div class="text-primary flex items-center justify-center gap-1">
+        <div class="text-red-500 flex items-center justify-center gap-1">
           <mat-icon fontIcon="info"></mat-icon>
           Please fill in all fields to create your poll
         </div>

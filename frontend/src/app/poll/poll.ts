@@ -100,7 +100,7 @@ export class Poll implements OnDestroy {
         },
         error: (error) => {
           console.error('Error submitting vote:', error);
-          this.errorMessage = 'Error submitting your vote. Please try again.';
+          this.errorMessage = 'Submit error';
         },
       });
   }

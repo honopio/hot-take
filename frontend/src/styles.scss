@@ -92,18 +92,6 @@ body {
   }
 }
 
-.container-max {
-  @apply max-w-6xl mx-auto px-6;
-
-  @media (max-width: 640px) {
-    @apply px-4;
-  }
-}
-
-.page-container {
-  @apply max-w-6xl mx-auto my-10 p-6 sm:p-20;
-}
-
 input,
 textarea,
 .input {

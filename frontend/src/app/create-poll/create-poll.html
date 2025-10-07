@@ -3,7 +3,7 @@
     <form #pollForm="ngForm" (ngSubmit)="createPoll()" novalidate>
       <!-- header -->
       <button
-        class="btn btn-ghost arrow-btn flex items-center gap-2 mb-8"
+        class="btn hover-shadow arrow-btn flex items-center gap-2 mb-8"
         routerLink="/"
       >
         <mat-icon fontIcon="arrow_back"></mat-icon>
@@ -25,7 +25,7 @@
       <div class="card mb-8">
         <div class="flex items-center gap-3 mb-6">
           <div
-            class="w-10 h-10 bg-primary/70 rounded-xl flex items-center justify-center"
+            class="w-10 h-10 bg-primary text-black rounded-xl flex items-center justify-center"
           >
             <mat-icon class="text-text">help_outline</mat-icon>
           </div>
@@ -61,7 +61,7 @@
       <div class="card mb-8">
         <div class="flex items-center gap-3 mb-6">
           <div
-            class="w-10 h-10 bg-secondary/70 rounded-xl flex items-center justify-center"
+            class="w-10 h-10 bg-secondary text-black rounded-xl flex items-center justify-center"
           >
             <mat-icon class="text-text text-xl">list</mat-icon>
           </div>
@@ -73,7 +73,7 @@
           <div class="group">
             <div class="flex items-center gap-4">
               <div
-                class="w-10 h-10 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0 font-semibold text-text group-focus-within:bg-secondary group-focus-within:text-background transition-colors"
+                class="w-8 h-8 border rounded-full text-text flex items-center justify-center flex-shrink-0 font-semibold group-focus-within:text-black group-focus-within:bg-secondary"
               >
                 {{ i + 1 }}
               </div>
@@ -120,7 +120,7 @@
           @if (options.length < 10) {
           <button
             type="button"
-            class="btn flex border-none bg-secondary/30 items-center gap-2 hover:bg-secondary hover:border-secondary hover:text-black"
+            class="btn hover-shadow text-black border-black flex bg-secondary items-center gap-2"
             (click)="addOption()"
           >
             <mat-icon>add_circle_outline</mat-icon>

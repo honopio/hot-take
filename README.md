@@ -9,21 +9,23 @@ Create, share, and participate in anonymous polls with real-time results visuali
 - **Anonymous polling**: No registration required - just vote and see results
 - **Interactive charts**: Data visualization with ApexCharts
 - **Poll creation**: Create custom polls with multiple options
-- **Poll sharing**: Share polls via URL - polls are stored in MongoDB
+- **Poll sharing**: Share polls via URL - polls are stored in a MongoDB database
 - **Live results**: Votes update in real-time as others participate, with live chart animations
 <br></br>
 ### Create a poll :
 
-![create-poll](https://github.com/user-attachments/assets/74dd8a3c-98c8-4591-a31f-b6335da67d77)
+![create-poll](https://github.com/user-attachments/assets/466d678a-fcba-43b9-9c4c-10a8d2bc10b4)
+
 
 
 ### Vote in a poll :
 
-![vote-poll](https://github.com/user-attachments/assets/b5e4dff5-7c53-4911-9257-11a2cf54d38e)
+![vote-poll](https://github.com/user-attachments/assets/16027655-ebf6-45e7-ae6d-7baeb7499bcc)
+
 
 ### And see the results immediately after voting :
 
-![poll-results](https://github.com/user-attachments/assets/30a1c446-c193-4914-ae70-2f62670352d2)
+![poll-results](https://github.com/user-attachments/assets/a690b74e-50d9-4c53-a235-718a7f39e4e8)
 
 ## Tech Stack
 
@@ -40,9 +42,7 @@ Create, share, and participate in anonymous polls with real-time results visuali
 - **MongoDB Atlas** - integrated with schema validation and seeding
 - **Socket.IO** - room-based socket management for real-time updates
 
-### DevOps & Deployment
-
-- **Docker** - Containerization
-- **Docker Compose** - Multi-container setup for development and production.
-  - Ended up using a single container to deploy with AWS App Runner (by serving the Angular app from the Express backend)
-- **AWS App Runner** - Cloud deployment, **AWS ECR** for container registry
+### Deployment
+- **Docker Compose** for local development.
+- **AWS ECR** to store the single production image (contains compiled Angular frontend served by the Express backend and the backend API)
+- **AWS App Runner** : serverless container service used to deploy the image from ECR.

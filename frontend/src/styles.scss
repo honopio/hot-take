@@ -12,7 +12,7 @@
   --color-accent: #ffe14d; //yellow
   --color-pink: #ff90e8;
 
-  --color-validation-text: #98c4a2;
+  --color-validation-text: #83d595;
   --color-warning: #f17458;
   --color-border: #000000;
   --color-surface: #ffffff;
@@ -101,8 +101,9 @@ body {
 }
 
 input,
-textarea {
-  @apply px-4 py-3 rounded-lg border bg-surface text-text focus:outline-none;
+textarea,
+.input {
+  @apply px-4 py-3 rounded-lg border focus:outline-none;
   transition: all 0.2s ease;
 
   &::placeholder {

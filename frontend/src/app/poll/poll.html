@@ -1,6 +1,6 @@
 @if (this.successMessage) {
 <div
-  class="container-max mb-6 p-4 bg-green/30 border border-green rounded-xl flex items-center justify-center text-validation-text font-bold"
+  class="container-max mb-6 p-4 bg-validation-text/20 border border-green rounded-xl flex items-center justify-center text-validation-text font-bold"
 >
   <mat-icon fontIcon="check" class="mr-2" />
   <div>{{ this.successMessage }}</div>
@@ -10,7 +10,7 @@
 <div class="min-h-screen">
   <div class="max-w-4xl mx-auto px-6 py-12">
     <button
-      class="btn btn-ghost arrow-btn flex items-center gap-2 mb-8"
+      class="btn hover-shadow arrow-btn flex items-center gap-2 mb-8"
       routerLink="/"
     >
       <mat-icon fontIcon="arrow_back" />
@@ -45,7 +45,7 @@
     <div class="card mb-8">
       <div class="flex items-center gap-3 mb-6">
         <div
-          class="w-10 h-10 bg-primary/70 rounded-xl flex items-center justify-center"
+          class="w-10 h-10 bg-primary text-black rounded-xl flex items-center justify-center"
         >
           <mat-icon class="text-text text-xl">how_to_vote</mat-icon>
         </div>
@@ -56,7 +56,7 @@
         <div class="space-y-4 mb-8">
           @for (option of pollData().options; track option.optionId) {
           <label
-            class="flex items-center p-4 border-2 rounded-xl cursor-pointer"
+            class="flex items-center input"
             [ngClass]="{
               'border-primary ring-2 ring-primary': selectedOption === option.optionId,
               'border-border': selectedOption !== option.optionId
@@ -107,7 +107,7 @@
     <!-- Share Section -->
     <div class="text-center mb-4 border-t mt-12 pt-6">
       <h3 class="text-lg font-semibold">Share this poll</h3>
-      <p class="text-secondary-text text-sm">
+      <p class="text-secondary-text">
         Let others vote by sharing the link below
       </p>
     </div>
@@ -129,7 +129,7 @@
       </div>
 
       <button
-        class="btn px-6 py-3 rounded-xl flex items-center justify-center gap-2"
+        class="btn hover-shadow flex items-center justify-center gap-2"
         [ngClass]="{ 'border-secondary text-black bg-secondary': copied}"
         (click)="copyLink()"
       >

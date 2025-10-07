@@ -1,5 +1,5 @@
 <div class="min-h-screen">
-  <div class="max-w-4xl mx-auto p-3 sm:px-6 sm:py-12">
+  <div class="p-3 sm:px-6 sm:py-12">
     <form #pollForm="ngForm" (ngSubmit)="createPoll()" novalidate>
       <!-- header -->
       <button
@@ -16,7 +16,7 @@
           ></span>
           <h1 class="text-center relative z-10 px-2">Create your poll</h1>
         </div>
-        <p class="text-secondary-text text-lg max-w-2xl mx-auto">
+        <p class="text-secondary-text text-lg">
           Design your poll question and add options to choose from
         </p>
       </div>
@@ -40,20 +40,20 @@
             name="pollTitle"
             type="text"
             placeholder="What would you like to ask your audience?"
-            class="w-full px-4 py-4 border-2 border-border rounded-xl text-sm md:text-lg focus:ring-3 focus:ring-primary focus:border-transparent"
+            class="w-full px-4 py-4 border-2 border-border rounded-xl md:text-lg focus:ring-3 focus:ring-primary focus:border-transparent"
             [(ngModel)]="pollTitle"
             required
             #pollTitleInput="ngModel"
             maxlength="200"
           />
           <div
-            class="absolute right-4 top-4 text-xs text-secondary-text hidden sm:block"
+            class="absolute right-4 top-4 text-sm text-secondary-text hidden sm:block"
           >
             {{ pollTitle.length }}/200
           </div>
         </div>
         @if (pollTitleInput.invalid && pollForm.submitted) {
-        <div class="text-warning mt-2 text-sm">Please enter your question</div>
+        <div class="text-warning mt-2">Please enter your question</div>
         }
       </div>
 
@@ -90,7 +90,7 @@
                   #optionInput="ngModel"
                 />
                 <div
-                  class="absolute right-4 top-4 text-xs text-secondary-text hidden sm:block"
+                  class="absolute right-4 top-4 text-sm text-secondary-text hidden sm:block"
                 >
                   {{ options[i].length }}/100
                 </div>
@@ -108,9 +108,7 @@
               }
             </div>
             @if (optionInput.invalid && pollForm.submitted) {
-            <div class="text-warning text-sm ml-15">
-              This option cannot be empty
-            </div>
+            <div class="text-warning ml-15">This option cannot be empty</div>
             }
           </div>
           }
@@ -130,9 +128,7 @@
             >
           </button>
           } @else {
-          <div class="text-secondary-text text-sm">
-            Maximum of 10 options reached
-          </div>
+          <p>Maximum of 10 options reached</p>
           }
         </div>
       </div>

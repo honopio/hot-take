@@ -42,9 +42,7 @@
     <app-poll-results [pollData]="pollData()" />
     <!-- display a form if the user hasn't voted -->
     } @else {
-    <div
-      class="bg-surface rounded-2xl shadow-sm border border-border p-8 mb-8 hover:shadow-md transition-shadow"
-    >
+    <div class="card mb-8">
       <div class="flex items-center gap-3 mb-6">
         <div
           class="w-10 h-10 bg-primary/70 rounded-xl flex items-center justify-center"
@@ -58,7 +56,7 @@
         <div class="space-y-4 mb-8">
           @for (option of pollData().options; track option.optionId) {
           <label
-            class="flex items-center p-4 border-2 rounded-xl cursor-pointer transition-all hover:shadow-md"
+            class="flex items-center p-4 border-2 rounded-xl cursor-pointer"
             [ngClass]="{
               'border-primary ring-2 ring-primary': selectedOption === option.optionId,
               'border-border': selectedOption !== option.optionId

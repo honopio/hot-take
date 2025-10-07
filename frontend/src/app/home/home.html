@@ -24,10 +24,10 @@
         placeholder="Enter poll id or link"
         (keyup.enter)="pollInput && joinPoll(pollId.value)"
         [(ngModel)]="pollInput"
-        class="px-4 py-2 rounded-lg border-black"
+        class="px-4 py-2 rounded-lg border-black bg-white"
       />
       <button
-        class="btn hover-shadow"
+        class="btn hover-shadow border-black text-black"
         (click)="joinPoll(pollId.value)"
         [disabled]="!pollInput"
       >

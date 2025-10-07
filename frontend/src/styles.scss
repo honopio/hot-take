@@ -3,7 +3,7 @@
 @theme {
   --color-text: #000000;
   --color-secondary-text: #666666;
-  --color-background: #ffffff;
+  --color-background: #faf9f5;
   --color-card-bg: #ffffff;
 
   /* Vibrant Gumroad-style colors */
@@ -23,8 +23,9 @@
   [data-theme="dark"],
   .dark {
     --color-text: #f7f6f9;
+    --color-secondary-text: #919191;
     --color-background: #161616;
-    --color-card-bg: #1a1a1a;
+    --color-card-bg: #242424;
     --color-border: #333;
     --color-surface: #1a1a1a;
     --color-warning: #f7af9f;

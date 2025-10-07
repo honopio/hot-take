@@ -73,7 +73,7 @@ body {
 
 .hover-bigger {
   &:hover:not(:disabled) {
-    transform: translate(2px, 2px) scale(1.02);
+    transform: scale(1.05);
   }
 }
 

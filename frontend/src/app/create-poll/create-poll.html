@@ -1,5 +1,5 @@
 <div class="min-h-screen">
-  <div class="max-w-4xl mx-auto px-6 py-12">
+  <div class="max-w-4xl mx-auto p-3 sm:px-6 sm:py-12">
     <form #pollForm="ngForm" (ngSubmit)="createPoll()" novalidate>
       <!-- header -->
       <button
@@ -125,7 +125,9 @@
           >
             <mat-icon>add_circle_outline</mat-icon>
             <span>Add another option</span>
-            <span class="text-sm opacity-50">({{ options.length }}/10)</span>
+            <span class="text-sm opacity-50 hidden sm:block"
+              >({{ options.length }}/10)</span
+            >
           </button>
           } @else {
           <div class="text-secondary-text text-sm">

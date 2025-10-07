@@ -29,7 +29,7 @@
     --color-border: #575757;
     --color-surface: #1a1a1a;
     --color-warning: #f7af9f;
-    --shadow: none;
+    --shadow: 2px 2px 0 0 #636363; /* Slightly lighter than surface */
   }
 }
 html {

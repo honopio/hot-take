@@ -81,9 +81,7 @@ body {
   @apply rounded-md p-6 sm:p-8 bg-surface border border-border;
 }
 
-.card-clickable {
-  @apply rounded-md p-6 sm:p-8 bg-surface border-2 border-black;
-
+.card-shadow {
   &:hover {
     box-shadow: var(--shadow);
     transition: box-shadow 0.2s ease;

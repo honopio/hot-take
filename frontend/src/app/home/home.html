@@ -1,6 +1,6 @@
 <!-- Hero Section -->
 <div
-  class="px-6 py-8 sm:py-16 max-w-6xl mx-auto my-5 md:my-15 text-center card !bg-secondary"
+  class="px-6 py-8 sm:py-16 max-w-6xl mx-auto my-5 md:my-15 text-center sm:border sm:rounded-xl !bg-secondary"
 >
   <h1 class="text-black">Create & share polls instantly</h1>
   <p class="text-lg sm:text-xl text-black mb-6 sm:mb-12 max-w-2xl mx-auto">
@@ -17,21 +17,21 @@
       Create a poll
     </button>
     <span class="text-black">or</span>
-    <div class="flex gap-4">
+    <div class="flex gap-2 sm:gap-4 items-center min-w-0">
       <input
         #pollId
         type="text"
         placeholder="Enter poll id or link"
         (keyup.enter)="pollInput && joinPoll(pollId.value)"
         [(ngModel)]="pollInput"
-        class="px-4 py-2 rounded-lg border-black bg-white text-black"
+        class="flex-1 min-w-0 px-4 py-2 rounded-lg border-black bg-white text-black"
       />
       <button
-        class="btn hover-shadow border-black text-black"
+        class="btn hover-shadow border-black text-black whitespace-nowrap flex-shrink-0"
         (click)="joinPoll(pollId.value)"
         [disabled]="!pollInput"
       >
-        Join poll
+        <span class="whitespace-nowrap">Join poll</span>
       </button>
     </div>
   </div>

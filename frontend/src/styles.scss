@@ -29,10 +29,9 @@
     --color-border: #575757;
     --color-surface: #1a1a1a;
     --color-warning: #f7af9f;
-    --shadow: 2px 2px 0 0 #000000;
+    --shadow: none;
   }
 }
-
 html {
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   @apply text-text bg-background antialiased;

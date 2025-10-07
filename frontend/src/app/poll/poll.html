@@ -84,10 +84,8 @@
         </button>
 
         @if (voteForm.submitted && !voteForm.valid) {
-        <div
-          class="mt-4 text-sm text-warning flex items-center justify-center gap-1"
-        >
-          <mat-icon fontIcon="info" class="text-sm" />
+        <div class="mt-4 text-warning flex items-center justify-center gap-1">
+          <mat-icon fontIcon="info" />
           Please select an option
         </div>
         } @if (errorMessage && errorMessage == 'Submit error') {

@@ -26,7 +26,7 @@
     --color-secondary-text: #919191;
     --color-background: #161616;
     --color-card-bg: #242424;
-    --color-border: #333;
+    --color-border: #575757;
     --color-surface: #1a1a1a;
     --color-warning: #f7af9f;
     --shadow: 2px 2px 0 0 #000000;
@@ -48,6 +48,10 @@ body {
   @apply px-6 py-3 rounded-full font-bold border transition-all cursor-pointer;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+
+  &.arrow-btn {
+    @apply bg-surface border-border;
+  }
 
   &.arrow-btn:hover mat-icon {
     transform: translateX(-4px);

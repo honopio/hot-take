@@ -12,12 +12,14 @@ export class Header {
   isDark: boolean = false;
 
   ngOnInit() {
-    this.isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    document.documentElement.classList.toggle('dark', this.isDark); // adds dark class to the html element if OS is in dark mode
+    const saved = localStorage.getItem('theme');
+    this.isDark = saved === 'dark' ? true : false;
+    document.documentElement.classList.toggle('dark', this.isDark);
   }
 
   toggleTheme() {
     this.isDark = !this.isDark;
     document.documentElement.classList.toggle('dark', this.isDark);
+    localStorage.setItem('theme', this.isDark ? 'dark' : 'light'); //persist item in case of refresh
   }
 }

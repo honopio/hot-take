@@ -1,34 +1,32 @@
-# Build Angular frontend
-FROM node:20-alpine as frontend-build
-
-WORKDIR /app
+# Build Angular frontend (needs dev deps for Angular CLI / typescript)
+FROM node:20-alpine AS frontend-build
+WORKDIR /app/frontend
 COPY frontend/package*.json ./
 RUN npm ci
 COPY frontend/ ./
-RUN npm run build
+RUN npm run build -- --output-path=./dist
 
-# Build and run backend
-FROM node:20-alpine as production
-
-WORKDIR /app
-
-# Copy package files and install dependencies
+# Build backend (compile TS; needs dev deps)
+FROM node:20-alpine AS backend-builder
+WORKDIR /app/backend
 COPY backend/package*.json ./
+# install all deps (dev deps are required to build)
 RUN npm ci
-
-# Copy backend source
 COPY backend/ ./
-
 # Copy built frontend
 COPY --from=frontend-build /app/dist/frontend/browser ./public
-
-# Build TypeScript
+# compile typescript to dist
 RUN npm run build
 
-# Remove dev dependencies to reduce image size
-RUN npm prune --production
-
+# 3) final runtime (only production deps + compiled output)
+FROM node:20-alpine AS runtime
+WORKDIR /app
+# copy only package files and install production deps
+COPY backend/package*.json ./
+RUN npm ci --omit=dev
+# copy compiled backend + static frontend
+COPY --from=backend-builder /app/backend/dist ./dist
+COPY --from=backend-builder /app/backend/public ./public
+ENV NODE_ENV=production
 EXPOSE 3000
-
-# Use the compiled JavaScript, not TypeScript
 CMD ["node", "dist/server.js"]

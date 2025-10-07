@@ -4,7 +4,8 @@ WORKDIR /app/frontend
 COPY frontend/package*.json ./
 RUN npm ci
 COPY frontend/ ./
-RUN npm run build -- --output-path=./dist
+# build production assets into a predictable absolute path so runtime COPY works
+RUN npm run build -- --configuration=production --output-path=/app/dist/frontend/browser
 
 # Build backend (compile TS; needs dev deps)
 FROM node:20-alpine AS backend-builder
@@ -13,8 +14,8 @@ COPY backend/package*.json ./
 # install all deps (dev deps are required to build)
 RUN npm ci
 COPY backend/ ./
-# Copy built frontend
-COPY --from=frontend-build /app/dist/frontend/browser ./public
+# copy frontend build into backend public
+COPY --from=frontend-build /app/dist/frontend/browser/. ./public
 # compile typescript to dist
 RUN npm run build
 

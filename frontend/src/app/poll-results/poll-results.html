@@ -29,9 +29,7 @@
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
       @for (option of pollData()?.options; track option.optionId; let i =
       $index) {
-      <div
-        class="text-center p-4 bg-green/50 rounded-xl border border-black hover:-translate-y-1 transition-all"
-      >
+      <div class="text-center card !p-4">
         <div class="text-xs mb-1">OPTION {{ i + 1 }}</div>
         <div class="text-xl font-bold mb-2">
           {{ ((option.votes / totalVotes) * 100).toFixed(1) }}%

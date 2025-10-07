@@ -1,6 +1,6 @@
 <!-- Hero Section -->
 <div
-  class="px-6 py-8 sm:py-16 max-w-6xl mx-auto my-5 md:my-15 text-center sm:rounded-xl bg-secondary sm:border-2 sm:border-black"
+  class="px-6 py-8 sm:py-16 max-w-6xl mx-auto my-5 md:my-15 text-center sm:border border-black sm:rounded-xl !bg-secondary"
 >
   <h1 class="text-black">Create & share polls instantly</h1>
   <p class="text-lg sm:text-xl text-black mb-6 sm:mb-12 max-w-2xl mx-auto">
@@ -17,28 +17,28 @@
       Create a poll
     </button>
     <span class="text-black">or</span>
-    <div class="flex gap-4">
+    <div class="flex gap-2 sm:gap-4 items-center min-w-0">
       <input
         #pollId
         type="text"
         placeholder="Enter poll id or link"
         (keyup.enter)="pollInput && joinPoll(pollId.value)"
         [(ngModel)]="pollInput"
-        class="px-4 py-2 rounded-lg border-black"
+        class="flex-1 min-w-0 px-4 py-2 rounded-lg border-black bg-white text-black"
       />
       <button
-        class="btn"
+        class="btn hover-shadow border-black text-black whitespace-nowrap flex-shrink-0"
         (click)="joinPoll(pollId.value)"
         [disabled]="!pollInput"
       >
-        Join poll
+        <span class="whitespace-nowrap">Join poll</span>
       </button>
     </div>
   </div>
 </div>
 
 <!-- How It Works Section -->
-<div class="py-12 sm:py-16 bg-surface">
+<div class="py-12 sm:py-16">
   <div class="container-max">
     <div class="text-center mb-12">
       <h2>How It Works</h2>
@@ -48,9 +48,9 @@
     </div>
 
     <div class="grid md:grid-cols-3 gap-8">
-      <div class="card border border-border text-center group">
+      <div class="card text-center group">
         <div
-          class="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 bg-accent text-black"
+          class="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center bg-primary text-black"
         >
           <mat-icon class="text-2xl text-black">create</mat-icon>
         </div>
@@ -60,9 +60,9 @@
         </p>
       </div>
 
-      <div class="card border border-border text-center group">
+      <div class="card text-center group">
         <div
-          class="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 bg-green text-black"
+          class="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center bg-secondary text-black"
         >
           <mat-icon class="text-2xl text-black">share</mat-icon>
         </div>
@@ -73,9 +73,9 @@
         </p>
       </div>
 
-      <div class="card border border-border text-center group">
+      <div class="card text-center group">
         <div
-          class="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 bg-primary text-black"
+          class="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center bg-accent text-black"
         >
           <mat-icon class="text-2xl text-white">analytics</mat-icon>
         </div>

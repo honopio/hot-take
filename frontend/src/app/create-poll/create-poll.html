@@ -1,9 +1,9 @@
 <div class="min-h-screen">
-  <div class="max-w-4xl mx-auto px-6 py-12">
+  <div class="max-w-4xl mx-auto p-3 sm:px-6 sm:py-12">
     <form #pollForm="ngForm" (ngSubmit)="createPoll()" novalidate>
       <!-- header -->
       <button
-        class="btn btn-ghost arrow-btn flex items-center gap-2 mb-8"
+        class="btn hover-shadow arrow-btn flex items-center gap-2 mb-8"
         routerLink="/"
       >
         <mat-icon fontIcon="arrow_back"></mat-icon>
@@ -22,12 +22,10 @@
       </div>
 
       <!-- poll title -->
-      <div
-        class="bg-surface rounded-2xl shadow-sm border border-border p-8 mb-8 hover:shadow-md transition-shadow"
-      >
+      <div class="card mb-8">
         <div class="flex items-center gap-3 mb-6">
           <div
-            class="w-10 h-10 bg-primary/70 rounded-xl flex items-center justify-center"
+            class="w-10 h-10 bg-primary text-black rounded-xl flex items-center justify-center"
           >
             <mat-icon class="text-text">help_outline</mat-icon>
           </div>
@@ -60,12 +58,10 @@
       </div>
 
       <!-- options section -->
-      <div
-        class="bg-surface rounded-2xl shadow-sm border border-border p-8 mb-8 hover:shadow-md transition-shadow"
-      >
+      <div class="card mb-8">
         <div class="flex items-center gap-3 mb-6">
           <div
-            class="w-10 h-10 bg-secondary/70 rounded-xl flex items-center justify-center"
+            class="w-10 h-10 bg-secondary text-black rounded-xl flex items-center justify-center"
           >
             <mat-icon class="text-text text-xl">list</mat-icon>
           </div>
@@ -77,7 +73,7 @@
           <div class="group">
             <div class="flex items-center gap-4">
               <div
-                class="w-10 h-10 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0 font-semibold text-text group-focus-within:bg-secondary group-focus-within:text-background transition-colors"
+                class="w-8 h-8 border rounded-full text-text flex items-center justify-center flex-shrink-0 font-semibold group-focus-within:text-black group-focus-within:bg-secondary"
               >
                 {{ i + 1 }}
               </div>
@@ -124,12 +120,14 @@
           @if (options.length < 10) {
           <button
             type="button"
-            class="btn flex border-none bg-secondary/30 items-center gap-2 hover:bg-secondary hover:border-secondary hover:text-black"
+            class="btn hover-shadow text-black border-black flex bg-secondary items-center gap-2"
             (click)="addOption()"
           >
             <mat-icon>add_circle_outline</mat-icon>
             <span>Add another option</span>
-            <span class="text-sm opacity-50">({{ options.length }}/10)</span>
+            <span class="text-sm opacity-50 hidden sm:block"
+              >({{ options.length }}/10)</span
+            >
           </button>
           } @else {
           <div class="text-secondary-text text-sm">
